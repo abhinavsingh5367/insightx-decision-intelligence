@@ -285,6 +285,15 @@
 
         <div class="flex flex-wrap items-center gap-3">
           <div class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs flex items-center gap-2">
+            <span class="text-slate-400">Holding Days:</span>
+            <select id="holdingDaysSelect" class="bg-transparent text-xs font-bold text-emerald-300 focus:outline-none cursor-pointer">
+              <option value="14d" class="bg-slate-900 text-slate-100">Last 14 Days (Rolling)</option>
+              <option value="30d" class="bg-slate-900 text-slate-100" selected>Last 30 Days (Enterprise Baseline)</option>
+              <option value="60d" class="bg-slate-900 text-slate-100">Last 60 Days (Enterprise Holding)</option>
+              <option value="90d" class="bg-slate-900 text-slate-100">Last 90 Days (Quarterly Audit)</option>
+            </select>
+          </div>
+          <div class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs flex items-center gap-2">
             <span class="text-slate-400">Region:</span>
             <span class="font-bold text-purple-300">West Region (MH/GJ/GA)</span>
           </div>

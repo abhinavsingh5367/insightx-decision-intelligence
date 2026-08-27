@@ -10,6 +10,7 @@ class BusinessIntelligenceApp {
     this.data = window.BI_DATA || window.INSIGHTX_DATA;
     this.currentScenarioId = "scenario-west-revenue";
     this.currentPersona = "ceo"; // ceo | operations | marketing | analyst
+    this.currentHoldingDays = "30d"; // 14d | 30d | 60d | 90d
     this.currentView = "command_center"; // command_center | investigate | sandbox | gate | governance | landing
     this.currentInvestigateTab = "whatChanged"; // whatChanged | evidenceGraph | confidenceEngine
     this.currentGovTab = "sources"; // sources | contracts | rbac | telemetry | feedback
@@ -70,6 +71,14 @@ class BusinessIntelligenceApp {
   // EVENT LISTENERS & GLOBAL BINDINGS
   // ---------------------------------------------------------------------------
   setupEventListeners() {
+    // Holding Days Filter Dropdown
+    const holdingSelect = document.getElementById("holdingDaysSelect");
+    if (holdingSelect) {
+      holdingSelect.addEventListener("change", (e) => {
+        this.setHoldingDays(e.target.value);
+      });
+    }
+
     // Persona Selector Dropdown
     const personaSelect = document.getElementById("personaSelect");
     if (personaSelect) {
@@ -93,6 +102,15 @@ class BusinessIntelligenceApp {
         this.buildGraphModel();
       }
     });
+  }
+
+  setHoldingDays(days) {
+    this.currentHoldingDays = days;
+    const holdingSelect = document.getElementById("holdingDaysSelect");
+    if (holdingSelect) {
+      holdingSelect.value = days;
+    }
+    this.showToast(`Holding window updated to Last ${days.toUpperCase()}`);
   }
 
   // ---------------------------------------------------------------------------
