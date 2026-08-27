@@ -10,7 +10,6 @@ class BusinessIntelligenceApp {
     this.data = window.BI_DATA || window.INSIGHTX_DATA;
     this.currentScenarioId = "scenario-west-revenue";
     this.currentPersona = "ceo"; // ceo | operations | marketing | analyst
-    this.currentHoldingDays = "30d"; // 7d | 14d | 30d | 60d | 90d
     this.currentView = "command_center"; // command_center | investigate | sandbox | gate | governance | landing
     this.currentInvestigateTab = "whatChanged"; // whatChanged | evidenceGraph | confidenceEngine
     this.currentGovTab = "sources"; // sources | contracts | rbac | telemetry | feedback
@@ -58,9 +57,8 @@ class BusinessIntelligenceApp {
     // Start Canvas Physics & Particle Animation Loop
     this.startCanvasAnimation();
 
-    // Synchronize initial view state & alerts
+    // Synchronize initial view state
     this.setView(this.currentView);
-    this.updateHoldingDaysAlert();
 
     // Trigger Lucide icons
     if (window.lucide) {
@@ -72,14 +70,6 @@ class BusinessIntelligenceApp {
   // EVENT LISTENERS & GLOBAL BINDINGS
   // ---------------------------------------------------------------------------
   setupEventListeners() {
-    // Global Holding Horizon Selector
-    const holdingDaysSelect = document.getElementById("holdingDaysSelect");
-    if (holdingDaysSelect) {
-      holdingDaysSelect.addEventListener("change", (e) => {
-        this.setHoldingDays(e.target.value);
-      });
-    }
-
     // Persona Selector Dropdown
     const personaSelect = document.getElementById("personaSelect");
     if (personaSelect) {
@@ -103,63 +93,6 @@ class BusinessIntelligenceApp {
         this.buildGraphModel();
       }
     });
-  }
-
-  // ---------------------------------------------------------------------------
-  // ENTERPRISE HOLDING DAYS & TIME HORIZON MANAGEMENT
-  // ---------------------------------------------------------------------------
-  setHoldingDays(days) {
-    this.currentHoldingDays = days;
-
-    // Synchronize top dropdown
-    const holdingDaysSelect = document.getElementById("holdingDaysSelect");
-    if (holdingDaysSelect) {
-      holdingDaysSelect.value = days;
-    }
-
-    // Synchronize time-pill buttons
-    document.querySelectorAll(".time-pill").forEach(btn => {
-      if (btn.getAttribute("data-days") === days) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
-    });
-
-    // Update holding badge & KPI labels
-    const badge = document.getElementById("commandCenterHoldingBadge");
-    if (badge) {
-      badge.textContent = `Holding Window: ${days.toUpperCase()}`;
-    }
-    const kpiLabel = document.getElementById("kpiHoldingDaysLabel");
-    if (kpiLabel) {
-      kpiLabel.textContent = `Last ${days.toUpperCase()}`;
-    }
-
-    // Evaluate sparsity guardrails
-    this.updateHoldingDaysAlert();
-
-    // Re-render Command Center and active charts
-    this.renderCommandCenter();
-    if (this.currentView === "investigate" && this.currentInvestigateTab === "whatChanged") {
-      this.renderInvestigateChart();
-    }
-
-    this.showToast(`Enterprise holding horizon updated to Last ${days.toUpperCase()}`);
-  }
-
-  updateHoldingDaysAlert() {
-    const banner = document.getElementById("holdingDaysAlertBanner");
-    const text = document.getElementById("holdingDaysAlertText");
-    if (!banner || !text) return;
-
-    const sc = this.getCurrentScenario();
-    if (sc.isSparseHistory && (this.currentHoldingDays === "30d" || this.currentHoldingDays === "60d" || this.currentHoldingDays === "90d")) {
-      banner.classList.remove("hidden");
-      text.innerHTML = `The selected <strong>${this.currentHoldingDays.toUpperCase()}</strong> enterprise holding baseline exceeds the <strong>12-day launch history</strong> available for <em>${sc.kpiName}</em>. In accordance with the KPI Semantic Contract, data sparsity penalties (-15 pts) are actively enforced, triggering mandatory <strong>ABSTAIN / DEFER</strong> governance.`;
-    } else {
-      banner.classList.add("hidden");
-    }
   }
 
   // ---------------------------------------------------------------------------
@@ -187,17 +120,14 @@ class BusinessIntelligenceApp {
       });
     }
 
-    // Update Core UI Components across all views
+    // Update Core UI Components
     this.updateHeroKpiBanner();
     this.updatePersonaNarrative();
     this.renderInvestigateStage();
     this.renderTestSandbox();
     this.renderActStage();
     this.buildGraphModel();
-    this.updateHoldingDaysAlert();
     this.renderCommandCenter();
-
-    this.showToast(`Switched active scenario: ${sc.title.split('[')[0].trim()}`);
 
     // Trigger Lucide icons re-scan
     setTimeout(() => {
@@ -398,73 +328,36 @@ class BusinessIntelligenceApp {
   // VIEW 1: EXECUTIVE COMMAND CENTER
   // ---------------------------------------------------------------------------
   renderCommandCenter() {
-    this.renderCommandCenterScenarios();
-    this.renderActiveScenarioDossier();
-
     const container = document.getElementById("commandCenterKpisGrid");
     if (!container) return;
 
-    // Determine sparkline length based on current holding horizon
-    const sparklineLengths = {
-      "7d": 7,
-      "14d": 10,
-      "30d": 14,
-      "60d": 18,
-      "90d": 24
-    };
-    const targetLength = sparklineLengths[this.currentHoldingDays] || 14;
-
     container.innerHTML = this.data.kpis.map(kpi => {
       const isSelected = kpi.scenarioId === this.currentScenarioId;
-      
-      // Interpolate sparkline points for selected holding horizon
-      let rawPoints = kpi.sparkline || [10, 12, 11, 14, 13, 15];
-      let displayPoints = [];
-      for (let i = 0; i < targetLength; i++) {
-        const factor = i / (targetLength - 1);
-        const idx = Math.min(rawPoints.length - 1, Math.floor(factor * rawPoints.length));
-        const baseVal = rawPoints[idx];
-        const noise = (Math.sin(i * 1.5) * 0.05 * baseVal);
-        displayPoints.push(Number((baseVal + (i === targetLength - 1 ? 0 : noise)).toFixed(1)));
-      }
-
       return `
-        <div class="glass-panel p-4 space-y-2.5 cursor-pointer transition-all duration-200 hover:border-purple-500/60 relative overflow-hidden ${isSelected ? 'border-purple-500/90 ring-2 ring-purple-500/50 bg-slate-900/95 shadow-lg shadow-purple-500/15' : ''}" onclick="window.biApp.loadScenario('${kpi.scenarioId}'); window.biApp.setView('investigate');">
-          ${isSelected ? '<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-indigo-500"></div>' : ''}
-
-          <div class="flex items-center justify-between gap-1">
-            <span class="text-xs font-bold text-slate-200 truncate" title="${kpi.name}">${kpi.name}</span>
+        <div class="glass-panel p-4 space-y-2.5 cursor-pointer transition-all duration-200 hover:border-purple-500/60 ${isSelected ? 'border-purple-500/80 ring-1 ring-purple-500/40 bg-slate-900/90' : ''}" onclick="window.biApp.loadScenario('${kpi.scenarioId}'); window.biApp.setView('investigate');">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-300 truncate" title="${kpi.name}">${kpi.name}</span>
             <span class="badge ${kpi.statusBadge} text-[9px]">${kpi.status}</span>
           </div>
 
           <div class="flex items-baseline justify-between pt-1">
             <span class="text-xl font-extrabold text-slate-100 font-mono">${kpi.metric}</span>
-            <span class="delta-pill ${kpi.isNegative ? 'negative' : 'positive'} text-[11px] font-mono">${kpi.delta}</span>
+            <span class="delta-pill ${kpi.isNegative ? 'negative' : 'positive'} text-[11px]">${kpi.delta}</span>
           </div>
 
-          <!-- Sparkline Mini Visual Reacting to Holding Days -->
-          <div class="space-y-1">
-            <div class="h-6 w-full flex items-end gap-1 pt-1 opacity-85">
-              ${displayPoints.map((val, idx) => {
-                const min = Math.min(...displayPoints);
-                const max = Math.max(...displayPoints);
-                const heightPct = max === min ? 50 : Math.max(15, Math.round(((val - min) / (max - min)) * 100));
-                const isLatest = idx === displayPoints.length - 1;
-                return `<div class="flex-1 ${isLatest ? (kpi.isNegative ? 'bg-rose-500' : 'bg-emerald-500') : (isSelected ? 'bg-purple-500/50' : 'bg-slate-700/60')} rounded-t-sm hover:opacity-100 transition-all" style="height: ${heightPct}%;" title="Period ${idx+1}: ${val}"></div>`;
-              }).join("")}
-            </div>
-            <div class="flex justify-between text-[9px] text-slate-500 font-mono">
-              <span>-${this.currentHoldingDays.toUpperCase()}</span>
-              <span>Today</span>
-            </div>
+          <!-- Sparkline Mini Visual -->
+          <div class="h-6 w-full flex items-end gap-1 pt-1 opacity-80">
+            ${kpi.sparkline.map((val, idx) => {
+              const min = Math.min(...kpi.sparkline);
+              const max = Math.max(...kpi.sparkline);
+              const heightPct = max === min ? 50 : Math.max(15, Math.round(((val - min) / (max - min)) * 100));
+              return `<div class="flex-1 bg-purple-500/40 rounded-t-sm hover:bg-purple-400" style="height: ${heightPct}%;" title="Period ${idx+1}: ${val}"></div>`;
+            }).join("")}
           </div>
 
-          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono pt-1.5 border-t border-slate-800/80">
-            <span class="flex items-center gap-1">
-              ${isSelected ? '<span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>' : ''}
-              <span>Signal: <strong class="text-purple-300">${kpi.signalScore}/100</strong></span>
-            </span>
-            <span class="text-slate-400">${kpi.freshness}</span>
+          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono pt-1 border-t border-slate-800/80">
+            <span>Signal: <strong class="text-purple-300">${kpi.signalScore}/100</strong></span>
+            <span>${kpi.freshness}</span>
           </div>
         </div>
       `;
@@ -473,250 +366,36 @@ class BusinessIntelligenceApp {
     this.renderPrioritySignals();
   }
 
-  renderCommandCenterScenarios() {
-    const container = document.getElementById("commandCenterScenariosGrid");
-    if (!container) return;
-
-    const scenarioMeta = {
-      "scenario-west-revenue": {
-        tag: "HERO SCENARIO",
-        badge: "badge-rose",
-        exposure: "₹3.4M Deficit (West Zone)",
-        rootCause: "Bhiwandi Hub Dispatch Latency + SpeedFreight 3PL Breakdown",
-        confidenceBadge: "badge-emerald",
-        confidenceText: "78/100 • HIGH",
-        gateBadge: "badge-amber",
-        gateText: "ROUTE: REVIEW",
-        icon: "truck"
-      },
-      "scenario-new-product-conversion": {
-        tag: "ABSTENTION / SPARSE",
-        badge: "badge-purple",
-        exposure: "12-Day Launch Funnel (-18.0%)",
-        rootCause: "Contradictory Channel CAC vs Organic Conversion Signals",
-        confidenceBadge: "badge-rose",
-        confidenceText: "41/100 • LOW/SPARSE",
-        gateBadge: "badge-rose",
-        gateText: "ROUTE: ABSTAIN",
-        icon: "alert-triangle"
-      },
-      "scenario-d2c-margin": {
-        tag: "ACTIONABLE PLAYBOOK",
-        badge: "badge-cyan",
-        exposure: "-7.2% pts Margin Compression",
-        rootCause: "Meta Ads CAC Surge (+43.7%) + Ocean Bunker Surcharge (+$450/FEU)",
-        confidenceBadge: "badge-emerald",
-        confidenceText: "81/100 • ACTIONABLE",
-        gateBadge: "badge-emerald",
-        gateText: "ROUTE: RECOMMEND",
-        icon: "zap"
-      }
-    };
-
-    container.innerHTML = this.data.scenarios.map(sc => {
-      const isSelected = sc.id === this.currentScenarioId;
-      const meta = scenarioMeta[sc.id] || {
-        tag: "ACTIVE SCENARIO",
-        badge: "badge-purple",
-        exposure: sc.kpiDelta,
-        rootCause: "Multi-Source Anomaly",
-        confidenceBadge: "badge-purple",
-        confidenceText: "Validated",
-        gateBadge: "badge-purple",
-        gateText: "GOVERNED",
-        icon: "target"
-      };
-
-      return `
-        <div class="scenario-card p-5 space-y-3.5 cursor-pointer ${isSelected ? 'active ring-2 ring-purple-500/80 shadow-lg shadow-purple-500/20' : ''}" onclick="window.biApp.loadScenario('${sc.id}');">
-          <div class="flex items-start justify-between gap-2">
-            <div class="flex items-center gap-1.5 flex-wrap">
-              <span class="badge ${meta.badge} text-[10px] font-mono font-bold">${meta.tag}</span>
-              ${isSelected ? '<span class="badge badge-purple text-[10px] font-mono flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span>ACTIVE FOCUS</span>' : ''}
-            </div>
-            <span class="badge ${meta.gateBadge} text-[9px] font-mono font-bold">${meta.gateText}</span>
-          </div>
-
-          <div class="space-y-1">
-            <h4 class="text-sm font-bold text-slate-100 flex items-center gap-2 leading-snug">
-              <i data-lucide="${meta.icon}" class="w-4 h-4 ${isSelected ? 'text-purple-400' : 'text-slate-400'} shrink-0"></i>
-              <span>${sc.title.split('[')[0].trim()}</span>
-            </h4>
-            <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">${sc.subtitle}</p>
-          </div>
-
-          <div class="p-3 rounded-lg bg-slate-950/70 border border-slate-800/80 space-y-2 text-xs">
-            <div class="flex items-center justify-between">
-              <span class="text-slate-400">Financial Exposure:</span>
-              <span class="font-bold text-rose-400 font-mono">${meta.exposure}</span>
-            </div>
-            <div class="flex items-baseline justify-between gap-2">
-              <span class="text-slate-400 shrink-0">Root Triangulation:</span>
-              <span class="text-slate-200 text-right truncate font-medium" title="${meta.rootCause}">${meta.rootCause}</span>
-            </div>
-            <div class="flex items-center justify-between pt-1 border-t border-slate-800/60 font-mono text-[11px]">
-              <span class="text-slate-400">Confidence Score:</span>
-              <span class="font-bold ${sc.isAbstentionScenario ? 'text-rose-400' : 'text-purple-300'}">${meta.confidenceText}</span>
-            </div>
-          </div>
-
-          <div class="pt-1">
-            <button class="${isSelected ? 'btn-primary' : 'btn-outline'} text-xs py-1.5 px-3 w-full font-semibold flex items-center justify-center gap-1.5" onclick="event.stopPropagation(); window.biApp.loadScenario('${sc.id}'); ${isSelected ? `window.biApp.setView('investigate');` : ''}">
-              <i data-lucide="${isSelected ? 'sparkles' : 'mouse-pointer'}" class="w-3.5 h-3.5"></i>
-              <span>${isSelected ? 'Open Full Investigation Hub →' : 'Select This Scenario'}</span>
-            </button>
-          </div>
-        </div>
-      `;
-    }).join("");
-  }
-
-  renderActiveScenarioDossier() {
-    const container = document.getElementById("commandCenterActiveDossier");
-    if (!container) return;
-
-    const sc = this.getCurrentScenario();
-
-    container.innerHTML = `
-      <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-purple-600/10 blur-3xl pointer-events-none"></div>
-
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
-        <div class="space-y-1.5">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="badge badge-purple text-xs font-mono font-bold">ACTIVE SCENARIO DOSSIER</span>
-            <span class="badge badge-cyan text-xs font-mono">${sc.category}</span>
-            <span class="badge ${sc.isAbstentionScenario ? 'badge-rose' : 'badge-emerald'} text-xs font-mono">
-              ${sc.isAbstentionScenario ? 'ABSTAIN GUARDRAIL ACTIVE' : 'EVIDENCE CONFIRMED'}
-            </span>
-            <span class="badge badge-amber text-xs font-mono font-bold">GATE: ${sc.act ? sc.act.routedGate : 'REVIEW'}</span>
-          </div>
-          <h3 class="text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
-            <span>${sc.title}</span>
-          </h3>
-          <p class="text-xs text-slate-300 max-w-3xl leading-relaxed">${sc.subtitle}</p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
-          <button class="btn-primary text-xs py-2 px-4 flex items-center gap-2 shadow-lg shadow-purple-500/20 font-bold" onclick="window.biApp.setView('investigate');">
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
-            <span>Run 10-Step Investigation →</span>
-          </button>
-          <button class="btn-outline text-xs py-2 px-3.5 flex items-center gap-1.5 font-semibold" onclick="window.biApp.setView('sandbox');">
-            <i data-lucide="sliders" class="w-3.5 h-3.5 text-emerald-400"></i>
-            <span>What-If Sandbox</span>
-          </button>
-          <button class="btn-outline text-xs py-2 px-3.5 flex items-center gap-1.5 font-semibold" onclick="window.biApp.setView('gate');">
-            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-400"></i>
-            <span>Action Gate</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 3-Column Diagnostic Summary Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-        <!-- Column 1: Root Cause & Leading Hypothesis -->
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-2">
-          <div class="flex items-center justify-between text-xs text-purple-300 font-bold uppercase font-mono">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="git-branch" class="w-3.5 h-3.5 text-purple-400"></i>
-              <span>Leading Root Cause</span>
-            </span>
-            <span class="text-emerald-400 font-mono">${sc.explain ? sc.explain.hypothesisProbability : 88}% Prob.</span>
-          </div>
-          <p class="text-xs text-slate-200 font-semibold leading-relaxed">
-            ${sc.explain ? sc.explain.leadingHypothesis : 'Triangulated operational and supply chain disruption.'}
-          </p>
-          <div class="text-[11px] text-slate-400 pt-1 border-t border-slate-800/60 flex items-center gap-1.5">
-            <span class="text-purple-400 font-bold">Lineage:</span>
-            <span class="truncate font-mono">${sc.explain && sc.explain.causalLabel ? sc.explain.causalLabel : 'Multi-Source Lineage'}</span>
-          </div>
-        </div>
-
-        <!-- Column 2: Driver Variance Decomposition -->
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-2">
-          <div class="flex items-center justify-between text-xs text-cyan-300 font-bold uppercase font-mono">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-cyan-400"></i>
-              <span>Primary Driver Share</span>
-            </span>
-            <span class="badge badge-purple text-[9px] font-mono">ANOVA</span>
-          </div>
-          <div class="space-y-2">
-            ${sc.explain && sc.explain.driverContributions ? sc.explain.driverContributions.slice(0, 2).map(d => `
-              <div class="space-y-1">
-                <div class="flex justify-between text-[11px]">
-                  <span class="text-slate-300 truncate max-w-[190px]">${d.driver}</span>
-                  <span class="font-mono text-purple-300 font-bold">${d.contributionPct}%</span>
-                </div>
-                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                  <div class="h-full bg-purple-500 rounded-full" style="width: ${d.contributionPct}%"></div>
-                </div>
-              </div>
-            `).join("") : '<div class="text-xs text-slate-400">Drivers calculated upon investigation.</div>'}
-          </div>
-        </div>
-
-        <!-- Column 3: Disproven Hypotheses & Counter-Signals -->
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-2">
-          <div class="flex items-center justify-between text-xs text-amber-300 font-bold uppercase font-mono">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="check-check" class="w-3.5 h-3.5 text-amber-400"></i>
-              <span>Suspected Drivers Disproven</span>
-            </span>
-            <span class="badge badge-emerald text-[9px] font-mono">Verified</span>
-          </div>
-          <div class="space-y-1.5 text-xs">
-            ${sc.explain && sc.explain.suspectedDriversDisproven ? sc.explain.suspectedDriversDisproven.slice(0, 2).map(dis => `
-              <div class="p-2 rounded bg-slate-950/70 border border-slate-800/60 flex items-start gap-2">
-                <span class="delta-pill negative text-[9px] shrink-0 mt-0.5 font-bold">REJECTED</span>
-                <div>
-                  <div class="text-slate-200 font-medium text-[11px]">${dis.driver}</div>
-                  <div class="text-slate-400 text-[10px] leading-snug">${dis.reason}</div>
-                </div>
-              </div>
-            `).join("") : '<div class="text-xs text-slate-400">Hypotheses verified.</div>'}
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
   renderPrioritySignals() {
     const container = document.getElementById("prioritySignalsList");
     if (!container) return;
 
-    container.innerHTML = this.data.prioritySignals.map(sig => {
-      const isSelectedScenario = sig.scenarioId === this.currentScenarioId;
-
-      return `
-        <div class="p-4 rounded-xl bg-slate-900/80 border transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-3 ${isSelectedScenario ? 'border-purple-500/90 ring-1 ring-purple-500/40 bg-slate-900/95 shadow-md shadow-purple-500/10' : 'border-slate-800/90 hover:border-purple-500/40'}" onclick="window.biApp.loadScenario('${sig.scenarioId}'); window.biApp.setView('investigate');">
-          <div class="flex items-center gap-3.5">
-            <div class="w-8 h-8 rounded-lg ${isSelectedScenario ? 'bg-purple-600 text-white shadow-md shadow-purple-500/30' : 'bg-purple-500/20 text-purple-400'} flex items-center justify-center font-bold font-mono text-xs">
-              #${sig.rank}
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-xs font-bold text-slate-100">${sig.title}</span>
-                <span class="badge ${sig.statusBadge} text-[9px] font-mono">${sig.actionRoute}</span>
-                ${isSelectedScenario ? '<span class="badge badge-purple text-[9px] font-mono font-bold">ACTIVE SCENARIO FOCUS</span>' : ''}
-              </div>
-              <p class="text-[11px] text-slate-400 mt-0.5">${sig.entity} • Assigned: <span class="text-purple-300 font-semibold">${sig.assignedOwner}</span></p>
-            </div>
+    container.innerHTML = this.data.prioritySignals.map(sig => `
+      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/90 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-purple-500/40 transition-all cursor-pointer" onclick="window.biApp.loadScenario('${sig.scenarioId}'); window.biApp.setView('investigate');">
+        <div class="flex items-center gap-3.5">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono text-xs">
+            #${sig.rank}
           </div>
-
-          <div class="flex items-center gap-4 text-xs font-mono self-end md:self-center">
-            <div class="text-right">
-              <span class="text-[10px] text-slate-400 block">Composite Priority</span>
-              <span class="text-xs font-bold text-purple-300">${sig.compositePriorityScore}/100</span>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-slate-100">${sig.title}</span>
+              <span class="badge ${sig.statusBadge} text-[9px]">${sig.actionRoute}</span>
             </div>
-            <button class="btn-outline text-xs py-1.5 px-3 font-semibold flex items-center gap-1" onclick="event.stopPropagation(); window.biApp.loadScenario('${sig.scenarioId}'); window.biApp.setView('investigate');">
-              <span>Investigate</span>
-              <span>→</span>
-            </button>
+            <p class="text-[11px] text-slate-400 mt-0.5">${sig.entity} • Assigned: <span class="text-purple-300">${sig.assignedOwner}</span></p>
           </div>
         </div>
-      `;
-    }).join("");
+
+        <div class="flex items-center gap-4 text-xs font-mono self-end md:self-center">
+          <div class="text-right">
+            <span class="text-[10px] text-slate-400 block">Composite Priority</span>
+            <span class="text-xs font-bold text-purple-300">${sig.compositePriorityScore}/100</span>
+          </div>
+          <button class="btn-outline text-xs py-1.5 px-3 font-semibold" onclick="event.stopPropagation(); window.biApp.loadScenario('${sig.scenarioId}'); window.biApp.setView('investigate');">
+            Investigate →
+          </button>
+        </div>
+      </div>
+    `).join("");
   }
 
   // ---------------------------------------------------------------------------
@@ -841,50 +520,7 @@ class BusinessIntelligenceApp {
     if (!canvas) return;
 
     const sc = this.getCurrentScenario();
-    const rawData = sc.detect.chartData;
-
-    // Build holding-horizon-adapted labels and data series
-    const horizonConfigs = {
-      "7d": {
-        labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7 (Today)"],
-        count: 7
-      },
-      "14d": {
-        labels: ["D1", "D3", "D5", "D7", "D9", "D11", "D13", "D14 (Today)"],
-        count: 8
-      },
-      "30d": {
-        labels: ["Day 1", "Day 5", "Day 10", "Day 15", "Day 20", "Day 25", "Day 28", "Day 30 (Today)"],
-        count: 8
-      },
-      "60d": {
-        labels: ["Day 1", "Day 10", "Day 20", "Day 30", "Day 40", "Day 50", "Day 55", "Day 60 (Today)"],
-        count: 8
-      },
-      "90d": {
-        labels: ["W1", "W2", "W4", "W6", "W8", "W10", "W12", "W13 (Today)"],
-        count: 8
-      }
-    };
-
-    const cfg = horizonConfigs[this.currentHoldingDays] || horizonConfigs["30d"];
-    const targetCount = cfg.count;
-
-    // Interpolate helper
-    const interpolateArray = (arr, count) => {
-      const result = [];
-      for (let i = 0; i < count; i++) {
-        const factor = i / (count - 1);
-        const idx = Math.min(arr.length - 1, Math.floor(factor * arr.length));
-        result.push(arr[idx]);
-      }
-      return result;
-    };
-
-    const displayLabels = cfg.labels;
-    const displayBaseline = interpolateArray(rawData.baseline, targetCount);
-    const displayLower = interpolateArray(rawData.expectedLower, targetCount);
-    const displayActual = interpolateArray(rawData.actual, targetCount);
+    const d = sc.detect.chartData;
 
     if (this.charts.investigate) {
       this.charts.investigate.destroy();
@@ -893,11 +529,11 @@ class BusinessIntelligenceApp {
     this.charts.investigate = new Chart(canvas.getContext("2d"), {
       type: "line",
       data: {
-        labels: displayLabels,
+        labels: d.labels,
         datasets: [
           {
-            label: `Expected Baseline (${this.currentHoldingDays.toUpperCase()} Horizon)`,
-            data: displayBaseline,
+            label: "Expected Seasonal Baseline",
+            data: d.baseline,
             borderColor: "rgba(148, 163, 184, 0.7)",
             borderDash: [5, 5],
             borderWidth: 2,
@@ -906,7 +542,7 @@ class BusinessIntelligenceApp {
           },
           {
             label: "Expected Lower Bound (2σ)",
-            data: displayLower,
+            data: d.expectedLower,
             borderColor: "rgba(245, 158, 11, 0.4)",
             borderDash: [2, 2],
             borderWidth: 1,
@@ -915,8 +551,8 @@ class BusinessIntelligenceApp {
             backgroundColor: "rgba(139, 92, 246, 0.05)"
           },
           {
-            label: `Actual Observed Signal (${sc.isSparseHistory ? '12d Sparse' : 'Persistent'})`,
-            data: displayActual,
+            label: "Actual Observed Signal",
+            data: d.actual,
             borderColor: sc.isNegative ? "#f43f5e" : "#10b981",
             backgroundColor: sc.isNegative ? "rgba(244, 63, 94, 0.15)" : "rgba(16, 185, 129, 0.15)",
             borderWidth: 3,
