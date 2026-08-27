@@ -1,0 +1,35 @@
+{
+  "name": "businessintelligence-ai",
+  "version": "2.4.0",
+  "description": "Evidence-Backed Decision Intelligence Platform for Accenture Innovation Challenge 2026 Round 2 — From KPI Movement to Trusted Business Action.",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx serve -p 3000 .",
+    "serve": "python3 -m http.server 3000",
+    "dev": "npx serve -p 3000 .",
+    "test": "node --check app.js data.js && node -e \"JSON.parse(require('fs').readFileSync('data.json'))\" && echo '✓ All JS syntax & JSON data models valid!'",
+    "export-data": "node -e \"const data = require('./data.js'); require('fs').writeFileSync('./data.json', JSON.stringify(data, null, 2)); console.log('Exported data.json');\""
+  },
+  "keywords": [
+    "decision-intelligence",
+    "business-intelligence",
+    "accenture-innovation-challenge",
+    "kpi-investigation",
+    "evidence-graph",
+    "anti-hallucination",
+    "counterfactual-simulation",
+    "ai-governance"
+  ],
+  "author": "Team InsightX (Aritra Gupta, Abhishek Anand, Abhishek Biradar)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/InsightX-AIC2026/businessintelligence-ai.git"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

@@ -1,0 +1,2125 @@
+{
+  "systemMetadata": {
+    "platformName": "BUSINESSINTELLIGENCE.AI",
+    "tagline": "From KPI movement to trusted business action.",
+    "competition": "Accenture Innovation Challenge 2026 (Round 2)",
+    "teamName": "InsightX",
+    "version": "2.4.0-prod",
+    "coreWorkflow": "DETECT → DIAGNOSE → CORROBORATE → EXPLAIN → TEST → ACT",
+    "differentiator": "EVIDENCE-BACKED DECISION INTELLIGENCE",
+    "trustPrinciples": [
+      "The LLM is NOT quantitative truth; deterministic calculations are authoritative for numeric values.",
+      "SQL, business rules, and statistical ML are used for analytical truth.",
+      "Retrieval provides contextual evidence; LLM is used for intent, orchestration, and persona narratives.",
+      "Causal claims must not be invented; scenario analysis != causal inference.",
+      "Contradictory evidence remains visible; insufficient evidence triggers REVIEW / ABSTAIN.",
+      "Every important insight has traceable lineage and auditability."
+    ],
+    "lastSyncTimestamp": "2026-08-27T18:26:36.667Z",
+    "engineStatus": "Active • 8 Connectors Live",
+    "signalsProcessedToday": 18420,
+    "activeAnomalies": 3
+  },
+  "kpis": [
+    {
+      "id": "kpi_revenue",
+      "name": "Revenue",
+      "metric": "₹38.7M",
+      "baseline": "₹42.1M",
+      "delta": "-₹3.4M (-8.1%)",
+      "deltaPct": -8.1,
+      "isNegative": true,
+      "unit": "INR (Millions)",
+      "status": "MATERIAL",
+      "statusBadge": "badge-rose",
+      "signalScore": 92,
+      "confidenceScore": 78,
+      "gateRoute": "REVIEW",
+      "freshness": "15 min ago",
+      "source": "ERP / Finance Ledger",
+      "grain": "Daily × Region × Product",
+      "sparkline": [
+        42.1,
+        42,
+        42.2,
+        41.8,
+        40.5,
+        39.8,
+        39.2,
+        38.7
+      ],
+      "materialityScore": 94,
+      "strategicImportance": "Critical",
+      "scenarioId": "scenario-west-revenue"
+    },
+    {
+      "id": "kpi_gross_margin",
+      "name": "Gross Margin",
+      "metric": "21.2%",
+      "baseline": "28.4%",
+      "delta": "-7.2% pts",
+      "deltaPct": -25.3,
+      "isNegative": true,
+      "unit": "%",
+      "status": "MATERIAL",
+      "statusBadge": "badge-rose",
+      "signalScore": 95,
+      "confidenceScore": 81,
+      "gateRoute": "RECOMMEND",
+      "freshness": "4 min ago",
+      "source": "ERP COGS & Meta Ads",
+      "grain": "Order × Channel × SKU",
+      "sparkline": [
+        28.4,
+        28.3,
+        27.1,
+        25.4,
+        23.8,
+        22.5,
+        21.2
+      ],
+      "materialityScore": 89,
+      "strategicImportance": "High",
+      "scenarioId": "scenario-d2c-margin"
+    },
+    {
+      "id": "kpi_orders_velocity",
+      "name": "Orders & Velocity",
+      "metric": "41,200",
+      "baseline": "48,000",
+      "delta": "-6,800 (-14.2%)",
+      "deltaPct": -14.2,
+      "isNegative": true,
+      "unit": "Count",
+      "status": "WATCH",
+      "statusBadge": "badge-amber",
+      "signalScore": 84,
+      "confidenceScore": 84,
+      "gateRoute": "ESCALATE",
+      "freshness": "18 min ago",
+      "source": "CRM / Sales Cloud",
+      "grain": "Hourly × Order",
+      "sparkline": [
+        48,
+        47.5,
+        46.8,
+        45.2,
+        43.8,
+        42.1,
+        41.2
+      ],
+      "materialityScore": 81,
+      "strategicImportance": "High",
+      "scenarioId": "scenario-saas-nrr"
+    },
+    {
+      "id": "kpi_conversion_rate",
+      "name": "Conversion Rate (New Line)",
+      "metric": "2.4%",
+      "baseline": "2.9%",
+      "delta": "-0.5% pts (-18.0%)",
+      "deltaPct": -18,
+      "isNegative": true,
+      "unit": "%",
+      "status": "DATA ISSUE / SPARSE",
+      "statusBadge": "badge-purple",
+      "signalScore": 41,
+      "confidenceScore": 41,
+      "gateRoute": "DEFER",
+      "freshness": "1 hour ago",
+      "source": "GA4 & E-Commerce Web",
+      "grain": "Daily × Campaign (12-Day History)",
+      "sparkline": [
+        2.9,
+        2.8,
+        2.7,
+        2.6,
+        2.5,
+        2.4
+      ],
+      "materialityScore": 58,
+      "strategicImportance": "Medium (New Product)",
+      "scenarioId": "scenario-new-product-conversion"
+    },
+    {
+      "id": "kpi_returns_sla",
+      "name": "Returns & SLA Breach",
+      "metric": "8.4%",
+      "baseline": "4.2%",
+      "delta": "+4.2% pts (+100%)",
+      "deltaPct": 100,
+      "isNegative": true,
+      "unit": "%",
+      "status": "WATCH",
+      "statusBadge": "badge-amber",
+      "signalScore": 76,
+      "confidenceScore": 78,
+      "gateRoute": "REVIEW",
+      "freshness": "2 hours ago",
+      "source": "Operations WMS & Support",
+      "grain": "Daily × Facility",
+      "sparkline": [
+        4.2,
+        4.3,
+        4.8,
+        5.6,
+        6.7,
+        7.8,
+        8.4
+      ],
+      "materialityScore": 74,
+      "strategicImportance": "Medium",
+      "scenarioId": "scenario-west-revenue"
+    }
+  ],
+  "prioritySignals": [
+    {
+      "rank": 1,
+      "kpiId": "kpi_revenue",
+      "title": "West Region Revenue Anomaly (-8.1%)",
+      "entity": "West Region • Consumer Electronics",
+      "businessImpactScore": 96,
+      "statisticalAnomalyScore": 92,
+      "persistenceScore": 94,
+      "confidenceScore": 78,
+      "strategicImportanceScore": 95,
+      "compositePriorityScore": 91.5,
+      "actionRoute": "REVIEW",
+      "statusBadge": "badge-rose",
+      "assignedOwner": "VP Regional Operations",
+      "scenarioId": "scenario-west-revenue"
+    },
+    {
+      "rank": 2,
+      "kpiId": "kpi_gross_margin",
+      "title": "D2C Blended Gross Margin Compression (-7.2% pts)",
+      "entity": "D2C Footwear & Apparel",
+      "businessImpactScore": 90,
+      "statisticalAnomalyScore": 95,
+      "persistenceScore": 88,
+      "confidenceScore": 81,
+      "strategicImportanceScore": 88,
+      "compositePriorityScore": 88.8,
+      "actionRoute": "RECOMMEND",
+      "statusBadge": "badge-rose",
+      "assignedOwner": "CMO / Sourcing Director",
+      "scenarioId": "scenario-d2c-margin"
+    },
+    {
+      "rank": 3,
+      "kpiId": "kpi_orders_velocity",
+      "title": "Enterprise SaaS NRR Churn Risk (-6.8% pts)",
+      "entity": "Cloud Data Gateway v2.4 • Tier-1 Accounts",
+      "businessImpactScore": 88,
+      "statisticalAnomalyScore": 88,
+      "persistenceScore": 86,
+      "confidenceScore": 84,
+      "strategicImportanceScore": 92,
+      "compositePriorityScore": 88.4,
+      "actionRoute": "ESCALATE",
+      "statusBadge": "badge-amber",
+      "assignedOwner": "VP Engineering & Customer Success",
+      "scenarioId": "scenario-saas-nrr"
+    },
+    {
+      "rank": 4,
+      "kpiId": "kpi_conversion_rate",
+      "title": "New Product Conversion Rate Drop (-18.0%)",
+      "entity": "Smart Wearables X1 • Paid Social Funnel",
+      "businessImpactScore": 62,
+      "statisticalAnomalyScore": 68,
+      "persistenceScore": 45,
+      "confidenceScore": 41,
+      "strategicImportanceScore": 65,
+      "compositePriorityScore": 60.7,
+      "actionRoute": "DEFER / ABSTAIN",
+      "statusBadge": "badge-purple",
+      "assignedOwner": "Growth Product Manager",
+      "scenarioId": "scenario-new-product-conversion"
+    }
+  ],
+  "connectors": [
+    {
+      "id": "erp_finance",
+      "name": "ERP / Finance Ledger",
+      "icon": "wallet-cards",
+      "source": "SAP S/4HANA & NetSuite GL",
+      "type": "Structured Master",
+      "grain": "Daily × Region × Product × Customer Tier",
+      "refreshCadence": "Daily (Batch ETL)",
+      "freshness": "7 hours ago",
+      "latency": "12ms",
+      "qualityScore": 96,
+      "coverageScore": 99,
+      "recordsToday": "842,910 txns",
+      "status": "connected",
+      "description": "Recognized sales, discounts, invoices, COGS, regional unit margins, return allocations.",
+      "fields": [
+        "InvoiceID",
+        "PostingDate",
+        "Region",
+        "SKU_Category",
+        "GrossAmount",
+        "NetMargin",
+        "TaxCode",
+        "ReturnReserve"
+      ]
+    },
+    {
+      "id": "crm_sales",
+      "name": "CRM / Sales Cloud",
+      "icon": "users",
+      "source": "Salesforce Sales Cloud & HubSpot",
+      "type": "Structured Event",
+      "grain": "Hourly × Opportunity × Account Tier",
+      "refreshCadence": "Hourly Sync",
+      "freshness": "18 min ago",
+      "latency": "45ms",
+      "qualityScore": 92,
+      "coverageScore": 94,
+      "recordsToday": "41,200 events",
+      "status": "connected",
+      "description": "Pipeline stages, deal velocity, win/loss objections, contract renewals, sales notes.",
+      "fields": [
+        "OpportunityID",
+        "AccountTier",
+        "Stage",
+        "LossReason",
+        "ExpectedClose",
+        "ARR_Delta",
+        "RepNotes"
+      ]
+    },
+    {
+      "id": "product_ops",
+      "name": "Operations & WMS Telemetry",
+      "icon": "boxes",
+      "source": "Manhattan WMS & Datadog Metrics",
+      "type": "Near Real-Time Stream",
+      "grain": "Facility × SKU × Hour (Sub-minute events)",
+      "refreshCadence": "Near Real-Time (5 min interval)",
+      "freshness": "4 min ago",
+      "latency": "8ms",
+      "qualityScore": 89,
+      "coverageScore": 98,
+      "recordsToday": "4.9M events",
+      "status": "connected",
+      "description": "Warehouse staging inventory, dispatch turnaround, carrier handoffs, server p99 latency.",
+      "fields": [
+        "DispatchID",
+        "HubLocation",
+        "CarrierID",
+        "DispatchDelayHours",
+        "SKU_Barcode",
+        "OutageP99",
+        "StagingBayID"
+      ]
+    },
+    {
+      "id": "customer_voice",
+      "name": "Customer Voice & Support NLP",
+      "icon": "message-square-heart",
+      "source": "Zendesk, Delighted CSAT & Trustpilot",
+      "type": "Unstructured Text / Sentiment",
+      "grain": "Review / Ticket × Timestamp",
+      "refreshCadence": "Hourly NLP Pipeline",
+      "freshness": "35 min ago",
+      "latency": "34ms",
+      "qualityScore": 91,
+      "coverageScore": 90,
+      "recordsToday": "1,840 tickets",
+      "status": "connected",
+      "description": "Customer support tickets, delivery complaints, refund claims, NPS sentiment embeddings.",
+      "fields": [
+        "TicketID",
+        "CustomerTier",
+        "SentimentScore",
+        "IssueCategory",
+        "RawTranscript",
+        "AgentEscalationFlag"
+      ]
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing & Attribution",
+      "icon": "megaphone",
+      "source": "Google Ads, Meta Ads & GA4",
+      "type": "Semi-Structured",
+      "grain": "Hourly × Campaign × Channel",
+      "refreshCadence": "30-min Sync",
+      "freshness": "15 min ago",
+      "latency": "85ms",
+      "qualityScore": 94,
+      "coverageScore": 96,
+      "recordsToday": "1.2M hits",
+      "status": "connected",
+      "description": "Campaign spend, ROAS, blended CAC, attribution touchpoints, impressions, funnel dropoff.",
+      "fields": [
+        "CampaignID",
+        "Channel",
+        "Spend_INR",
+        "BlendedCAC",
+        "ROAS",
+        "Impressions",
+        "CTR",
+        "CheckoutDropRate"
+      ]
+    },
+    {
+      "id": "external_logistics",
+      "name": "Logistics & External Macro",
+      "icon": "cloud-lightning",
+      "source": "NHAI Highway Live & 3PL Telematics",
+      "type": "External Telematics",
+      "grain": "Corridor × Hour",
+      "refreshCadence": "Hourly Feed",
+      "freshness": "28 min ago",
+      "latency": "62ms",
+      "qualityScore": 87,
+      "coverageScore": 85,
+      "recordsToday": "12,400 events",
+      "status": "connected",
+      "description": "Highway transit bottlenecks, carrier fleet availability, monsoon weather disruption, toll logs.",
+      "fields": [
+        "Zone",
+        "CorridorID",
+        "CarrierFleetCapacityPct",
+        "TransitDelayHours",
+        "DisruptionAlertLevel"
+      ]
+    }
+  ],
+  "semanticContracts": [
+    {
+      "kpiId": "kpi_revenue",
+      "name": "Revenue",
+      "definition": "Recognized net sales after approved returns, merchant discounts, and tax exclusions.",
+      "formula": "SUM(gross_sales - approved_returns - promotional_discounts - taxes)",
+      "unit": "INR (Crores / Millions)",
+      "owner": "Chief Financial Officer (Finance Governance)",
+      "masterSource": "SAP S/4HANA (General Ledger 4100)",
+      "grain": "Daily × Region × Product × Channel",
+      "aggregation": "SUM (Additive across dimensions)",
+      "calendar": "Standard Fiscal 4-4-5 Calendar",
+      "hierarchy": "Enterprise → Business Unit → Region → State → SKU Category",
+      "materialityThreshold": "5.0% absolute deviation from 14-day rolling baseline",
+      "warningThreshold": "2.5% deviation",
+      "freshnessSLA": "8 hours max latency (P0 Alert if >12h)",
+      "missingDataPolicy": "Forward-fill last verified daily batch with 'DEGRADED_QUALITY' flag",
+      "driverDimensions": [
+        "Price Realization",
+        "Unit Volume",
+        "Product Mix",
+        "Return Rate",
+        "Fulfillment Latency",
+        "Marketing Attribution"
+      ],
+      "allowedPersonas": [
+        "CEO / Executive",
+        "Operations Leader",
+        "Marketing Leader",
+        "Data Analyst"
+      ],
+      "accessRestrictions": "Restricted GL line item breakdowns require Finance clearance",
+      "lineage": "Shopify/POS → Kafka Stream → Snowflake Raw → dbt Core → SAP GL 4100 → InsightX Semantic Layer"
+    },
+    {
+      "kpiId": "kpi_gross_margin",
+      "name": "Gross Margin",
+      "definition": "Net profit percentage remaining after deducting Cost of Goods Sold (COGS), inbound freight, and packaging from Net Revenue.",
+      "formula": "((Net_Revenue - (COGS + Inbound_Freight + Packaging_Cost)) / Net_Revenue) * 100",
+      "unit": "Percentage (%)",
+      "owner": "VP Financial Planning & Analysis",
+      "masterSource": "SAP COGS Ledger & 3PL Freight Invoices",
+      "grain": "Order × Channel × SKU Family",
+      "aggregation": "Weighted Average by Net Revenue",
+      "calendar": "Continuous Rolling 30-Day",
+      "hierarchy": "Corporate → Portfolio → Brand → SKU Category",
+      "materialityThreshold": "3.0% pts compression from target",
+      "warningThreshold": "1.5% pts compression",
+      "freshnessSLA": "12 hours max latency",
+      "missingDataPolicy": "Apply standard standard-cost variance baseline until actual invoices post",
+      "driverDimensions": [
+        "Supplier Unit Cost",
+        "Inbound Fuel Surcharge",
+        "Discount Rate",
+        "Blended CAC",
+        "Category Mix"
+      ],
+      "allowedPersonas": [
+        "CEO / Executive",
+        "Operations Leader",
+        "Marketing Leader",
+        "Data Analyst"
+      ],
+      "accessRestrictions": "Supplier-specific negotiated cost rates restricted to Procurement & Sourcing roles",
+      "lineage": "ERP COGS + Manhattan WMS Logistics Invoices → BigQuery Dataform → InsightX Semantic Layer"
+    },
+    {
+      "kpiId": "kpi_orders_velocity",
+      "name": "Orders & Order Velocity",
+      "metric": "Total valid booked commercial purchase orders received within observation window.",
+      "definition": "Total valid booked commercial purchase orders excluding test and fraud-flagged transactions.",
+      "formula": "COUNT(DISTINCT OrderID) WHERE FraudStatus = 'PASS' AND PaymentAuthorized = TRUE",
+      "unit": "Integer Count",
+      "owner": "VP Commercial Operations",
+      "masterSource": "Salesforce CRM & Order Management System",
+      "grain": "Hourly × Order",
+      "aggregation": "SUM (Additive)",
+      "calendar": "Real-Time 24/7 Clock",
+      "hierarchy": "Global → Zone → Account Segment → Sales Tier",
+      "materialityThreshold": "10.0% velocity decline over 3-day trend",
+      "warningThreshold": "5.0% velocity decline",
+      "freshnessSLA": "1 hour max latency",
+      "missingDataPolicy": "Interpolate from webhook stream heartbeat",
+      "driverDimensions": [
+        "Lead Velocity",
+        "API Ingestion Latency",
+        "Checkout Conversion",
+        "Sales Rep Quota Coverage"
+      ],
+      "allowedPersonas": [
+        "CEO / Executive",
+        "Operations Leader",
+        "Marketing Leader",
+        "Data Analyst"
+      ],
+      "accessRestrictions": "PII and Customer Names masked for non-Executive roles",
+      "lineage": "Web Checkout API / Salesforce Event Stream → Redshift Core → InsightX Semantic Layer"
+    },
+    {
+      "kpiId": "kpi_conversion_rate",
+      "name": "Conversion Rate (New Product Line)",
+      "definition": "Percentage of unique landing page product sessions that complete checkout for newly launched SKUs.",
+      "formula": "(Completed_Orders / Unique_Product_Sessions) * 100",
+      "unit": "Percentage (%)",
+      "owner": "Director of Product Growth",
+      "masterSource": "Google Analytics 4 & Web Telemetry",
+      "grain": "Daily × Campaign (New Product Launch Window)",
+      "aggregation": "Ratio of Sums",
+      "calendar": "Daily Continuous",
+      "hierarchy": "Product Line → SKU → Campaign Channel → Device Type",
+      "materialityThreshold": "15.0% relative dip",
+      "warningThreshold": "8.0% relative dip",
+      "freshnessSLA": "2 hours max latency",
+      "missingDataPolicy": "FLAG AS INSUFFICIENT HISTORY if total observations < 30 days",
+      "driverDimensions": [
+        "Price Elasticity",
+        "Page Load Latency",
+        "Creative Ad Quality",
+        "Traffic Channel Mix"
+      ],
+      "allowedPersonas": [
+        "CEO / Executive",
+        "Marketing Leader",
+        "Data Analyst"
+      ],
+      "accessRestrictions": "Open to Commercial and Growth teams",
+      "lineage": "GA4 BigQuery Export → DBT Staging → InsightX Semantic Layer"
+    },
+    {
+      "kpiId": "kpi_returns_sla",
+      "name": "Returns & Fulfillment SLA Breach Rate",
+      "definition": "Percentage of total fulfilled shipments that exceed committed SLA delivery turnaround or are returned as undeliverable/damaged.",
+      "formula": "(Late_Or_Returned_Orders / Total_Dispatched_Orders) * 100",
+      "unit": "Percentage (%)",
+      "owner": "VP Supply Chain & Customer Care",
+      "masterSource": "Manhattan WMS & Zendesk Care",
+      "grain": "Daily × Regional Fulfillment Center",
+      "aggregation": "Weighted Average by Volume",
+      "calendar": "Daily Operations Schedule",
+      "hierarchy": "National Network → Regional Hub → 3PL Carrier → Facility",
+      "materialityThreshold": "2.0% pts increase above baseline (4.2%)",
+      "warningThreshold": "1.0% pts increase",
+      "freshnessSLA": "4 hours max latency",
+      "missingDataPolicy": "Highlight carrier data gap if 3PL API is unauthenticated",
+      "driverDimensions": [
+        "Carrier Fleet Availability",
+        "Warehouse Labor Hours",
+        "Weather Disruptions",
+        "Packaging Failure Rate"
+      ],
+      "allowedPersonas": [
+        "CEO / Executive",
+        "Operations Leader",
+        "Data Analyst"
+      ],
+      "accessRestrictions": "Restricted carrier contractual penalty terms visible only to Ops & Procurement",
+      "lineage": "WMS Dispatch Webhook + Zendesk API → Postgres Storage → InsightX Semantic Layer"
+    }
+  ],
+  "rbacMatrix": {
+    "roles": [
+      {
+        "id": "ceo",
+        "name": "CEO / Executive",
+        "badge": "badge-purple",
+        "description": "Strategic executive overview, enterprise business impact, capital allocation, high-level action signoff.",
+        "allowedDomains": [
+          "strategic_kpis",
+          "financial_impact",
+          "high_level_narrative",
+          "decision_gating",
+          "executive_dossier"
+        ],
+        "restrictedDomains": [
+          "raw_wms_driver_logs",
+          "carrier_contract_penalties",
+          "sql_provenance_editor"
+        ]
+      },
+      {
+        "id": "operations",
+        "name": "Operations Leader",
+        "badge": "badge-cyan",
+        "description": "Facility dispatch latency, carrier logistics SLAs, warehouse throughput, supply chain playbooks.",
+        "allowedDomains": [
+          "strategic_kpis",
+          "operational_telemetry",
+          "wms_facility_logs",
+          "carrier_logistics",
+          "operations_playbooks",
+          "evidence_graph"
+        ],
+        "restrictedDomains": [
+          "marketing_ad_creative_spend",
+          "customer_pii_sentiment",
+          "executive_board_minutes"
+        ]
+      },
+      {
+        "id": "marketing",
+        "name": "Marketing Leader",
+        "badge": "badge-emerald",
+        "description": "Campaign spend, ROAS, blended CAC, attribution channels, demand generation playbooks.",
+        "allowedDomains": [
+          "strategic_kpis",
+          "campaign_performance",
+          "traffic_attribution",
+          "customer_voice_trends",
+          "marketing_playbooks",
+          "evidence_graph"
+        ],
+        "restrictedDomains": [
+          "sensitive_wms_dispatch_logs",
+          "internal_cogs_supplier_pricing",
+          "carrier_union_disputes"
+        ]
+      },
+      {
+        "id": "analyst",
+        "name": "Data Scientist / Analyst",
+        "badge": "badge-amber",
+        "description": "Complete statistical lineage, z-score derivations, SQL semantic queries, model calibration, raw data inspector.",
+        "allowedDomains": [
+          "strategic_kpis",
+          "financial_impact",
+          "operational_telemetry",
+          "campaign_performance",
+          "evidence_graph",
+          "sql_lineage",
+          "statistical_calibration",
+          "telemetry_deep_dive"
+        ],
+        "restrictedDomains": [
+          "executive_compensation",
+          "unmasked_pii"
+        ]
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "scenario-west-revenue",
+      "title": "West Region Revenue Anomaly (-8.1%) [Hero Scenario]",
+      "subtitle": "Significant 8.1% Revenue Contraction in West Division across Tier-1 Electronics",
+      "kpiId": "kpi_revenue",
+      "kpiName": "Revenue — West Region",
+      "kpiMetric": "₹38.7M",
+      "kpiBaseline": "₹42.1M",
+      "kpiDelta": "-₹3.4M (-8.1%)",
+      "isNegative": true,
+      "timeframe": "Last 14 Days vs Prior 14-Day Baseline",
+      "category": "Regional Sales & Supply Chain",
+      "severity": "High",
+      "isSparseHistory": false,
+      "isAbstentionScenario": false,
+      "investigationSteps": [
+        {
+          "id": 1,
+          "name": "Validating Signal Anomaly",
+          "status": "DONE",
+          "detail": "Calculated 3.2σ deviation beyond expected 14-day rolling mean."
+        },
+        {
+          "id": 2,
+          "name": "Checking Seasonality & Baseline Drift",
+          "status": "DONE",
+          "detail": "De-trended historical Q3 seasonality (-1.2% expected vs -8.1% observed)."
+        },
+        {
+          "id": 3,
+          "name": "Reconciling ERP / Finance Ledger",
+          "status": "DONE",
+          "detail": "Confirmed net sales drop isolated to West Zone Consumer Electronics (-24.2%)."
+        },
+        {
+          "id": 4,
+          "name": "Querying CRM & Pipeline Stage",
+          "status": "DONE",
+          "detail": "Discovered ₹2.1M distributor PO cancellations due to delivery stockouts."
+        },
+        {
+          "id": 5,
+          "name": "Querying WMS & Dispatch Telemetry",
+          "status": "DONE",
+          "detail": "Identified Bhiwandi hub dispatch latency climbed from 18h to 118h (SLA breach 18.4%)."
+        },
+        {
+          "id": 6,
+          "name": "Analyzing Customer Voice & Support NLP",
+          "status": "DONE",
+          "detail": "Flagged 37 VIP dealer escalations citing empty retail shelves."
+        },
+        {
+          "id": 7,
+          "name": "Cross-Checking Counter-Signals",
+          "status": "DONE",
+          "detail": "Pricing elasticity and ad CTR normal; verified issue is supply, not demand."
+        },
+        {
+          "id": 8,
+          "name": "Decomposing Driver Contribution",
+          "status": "DONE",
+          "detail": "Computed horizontal driver weights (Bhiwandi bottleneck 41%, Electronics volume 27%)."
+        },
+        {
+          "id": 9,
+          "name": "Computing Deterministic Confidence",
+          "status": "DONE",
+          "detail": "Derived 78/100 confidence across 3 independent corroborating streams."
+        },
+        {
+          "id": 10,
+          "name": "Formulating Scenario Model & Action",
+          "status": "DONE",
+          "detail": "Simulated BlueDart 3PL air reroute (+₹1.4M recovery); routed to REVIEW gate."
+        }
+      ],
+      "personaNarratives": {
+        "ceo": {
+          "headline": "West revenue is down 8.1% (₹3.4M deficit), heavily concentrated in Consumer Electronics.",
+          "synthesis": "Root cause analysis indicates a warehouse logistics bottleneck at the Bhiwandi fulfillment hub, leading to dealer cancellations. Evidence strongly corroborates operational disruption rather than brand decay or competitor price pressure. Causal link is strong observational.",
+          "recommendedFocus": "Authorize ₹0.48M emergency 3PL express carrier rerouting to recover ₹1.4M in stalled Q3 revenue.",
+          "decisionRights": "Requires Executive / VP Supply Chain financial sign-off."
+        },
+        "operations": {
+          "headline": "Bhiwandi & Pune WMS dispatch latency escalated to 118 hours (18.4% SLA breach rate).",
+          "synthesis": "Primary 3PL carrier SpeedFreight West reduced fleet capacity by 35% amid NH-48 road closures and local union disputes. 14 critical high-velocity Electronics SKUs are stalled in staging bays, causing 37 dealer delivery escalations.",
+          "recommendedFocus": "Activate secondary carrier SLA contingency with BlueDart Express Rail & Air Freight immediately.",
+          "decisionRights": "Operations Director has authority to reroute carrier volume up to 80% capacity."
+        },
+        "marketing": {
+          "headline": "Customer demand and acquisition traffic remain healthy; funnel drop occurs strictly post-add-to-cart.",
+          "synthesis": "Google & Meta Ads CTR is up +3.2%, and catalog price elasticity remains flat across non-West zones. The revenue drop is driven entirely by out-of-stock fulfillment deferrals. Do not discount or boost ad spend until logistics constraints are resolved.",
+          "recommendedFocus": "Pause promotional ad spend on the 14 constrained Electronics SKUs to prevent negative brand sentiment.",
+          "decisionRights": "Marketing Lead authorized to reallocate ad budget to available Home Appliance categories."
+        },
+        "analyst": {
+          "headline": "Validated 3.2σ statistical anomaly with 78/100 multi-source corroboration confidence.",
+          "synthesis": "ANOVA variance decomposition attributes 41% of revenue variance to fulfillment turnaround latency, 27% to regional product mix, and 14% to paid attribution dropoff. Pricing hypothesis is statistically rejected ($p < 0.001$). Continuous audit trace hash: `#8f92-bhiwandi-kpi`.",
+          "recommendedFocus": "Track 14-day post-intervention recovery curve and validate regression coefficients against South zone control group.",
+          "decisionRights": "Data Scientist sign-off on statistical calibration and model weights."
+        }
+      },
+      "detect": {
+        "signalScore": 92,
+        "signalStatus": "VALIDATED MATERIAL ANOMALY",
+        "signalSummary": "Anomaly confirmed: Deviation exceeds 3.2σ beyond 14-day seasonal baseline.",
+        "baselineChecks": [
+          {
+            "check": "Seasonality De-trending",
+            "status": "PASS",
+            "detail": "Expected seasonal variance was -1.2%; actual dip is -8.1% (6.9% unexplained gap)."
+          },
+          {
+            "check": "Volatility & Noise Filter",
+            "status": "PASS",
+            "detail": "Day-over-day variance exceeds 99th percentile threshold; persistent for 14 continuous days."
+          },
+          {
+            "check": "Expected Range Baseline",
+            "status": "FAIL",
+            "detail": "Expected lower bound ₹41.2M; actual ₹38.7M (breached floor by ₹2.5M)."
+          },
+          {
+            "check": "Signal Persistence",
+            "status": "PASS",
+            "detail": "Signal sustained over 3 consecutive rolling 5-day observation windows."
+          }
+        ],
+        "chartData": {
+          "labels": [
+            "Day 1",
+            "Day 3",
+            "Day 5",
+            "Day 7",
+            "Day 9",
+            "Day 11",
+            "Day 13",
+            "Day 14"
+          ],
+          "baseline": [
+            42.1,
+            42,
+            42.2,
+            42,
+            42.1,
+            41.9,
+            42,
+            42.1
+          ],
+          "actual": [
+            42.2,
+            41.8,
+            40.5,
+            39.8,
+            39.2,
+            38.9,
+            38.6,
+            38.7
+          ],
+          "expectedLower": [
+            41.2,
+            41.1,
+            41.3,
+            41.1,
+            41.2,
+            41,
+            41.1,
+            41.2
+          ]
+        }
+      },
+      "context": {
+        "semanticEntity": "Division: West Region (Maharashtra, Gujarat, Goa)",
+        "affectedCategories": [
+          "Consumer Electronics (Primary -24.2%)",
+          "Home Appliances (-4.1%)",
+          "Apparel (Normal +1.1%)"
+        ],
+        "activeChannels": [
+          "Offline Enterprise Dealers (64% impact)",
+          "Direct E-Commerce (36% impact)"
+        ],
+        "connectedDataNodes": 32,
+        "crossSourceLinkages": [
+          {
+            "from": "ERP Sales Ledger",
+            "to": "Manhattan WMS West Hub",
+            "relation": "Unfulfilled Backlog Spike (+320%)"
+          },
+          {
+            "from": "Zendesk Tickets",
+            "to": "3PL Fleet Logistics",
+            "relation": "Delivery Delay Complaints (37 escalations)"
+          },
+          {
+            "from": "Marketing Google Ads",
+            "to": "Competitor Price Index",
+            "relation": "Conversion dropped at Shipping step (Not Ad CTR)"
+          },
+          {
+            "from": "NHAI Highway Feed",
+            "to": "WMS Bhiwandi Hub",
+            "relation": "NH-48 Monsoon Ghat Road Transit Bottleneck (+48h)"
+          }
+        ]
+      },
+      "explain": {
+        "leadingHypothesis": "West fulfillment disruption & warehouse bottleneck → delivery delays → cancellations and dealer order deferrals",
+        "hypothesisProbability": 86,
+        "causalLabel": "Likely Driver (Causal Link Observational / Not Formally Proven)",
+        "driverContributions": [
+          {
+            "driver": "West Fulfillment & WMS Bottleneck",
+            "contributionPct": 41,
+            "status": "CORROBORATED",
+            "color": "bg-purple-500",
+            "evidence": "WMS dispatch latency +4.2 days & 18.4% SLA breach."
+          },
+          {
+            "driver": "Electronics Volume Contraction",
+            "contributionPct": 27,
+            "status": "CORROBORATED",
+            "color": "bg-indigo-500",
+            "evidence": "Tier-1 dealer PO deferrals totalling ₹2.1M."
+          },
+          {
+            "driver": "Paid Traffic Checkout Drop",
+            "contributionPct": 14,
+            "status": "PARTIAL",
+            "color": "bg-cyan-500",
+            "evidence": "Drop strictly occurs at estimated shipping delivery date step."
+          },
+          {
+            "driver": "Late Arrival Returns",
+            "contributionPct": 9,
+            "status": "CORROBORATED",
+            "color": "bg-amber-500",
+            "evidence": "Return rate jumped from 4.2% to 8.4% due to late arrivals."
+          },
+          {
+            "driver": "Standard Seasonality",
+            "contributionPct": 5,
+            "status": "BASE",
+            "color": "bg-slate-500",
+            "evidence": "Expected historical Q3 regional variance."
+          },
+          {
+            "driver": "Other Residual Variance",
+            "contributionPct": 4,
+            "status": "NOISE",
+            "color": "bg-slate-600",
+            "evidence": "Unaccounted statistical noise."
+          }
+        ],
+        "suspectedDriversDisproven": [
+          {
+            "driver": "Pricing Leakage / Elasticity",
+            "initialSuspicion": "-31%",
+            "verdict": "DISPROVEN",
+            "reason": "Elasticity curves flat; catalog prices identical to growing South/East zones."
+          },
+          {
+            "driver": "Paid Traffic Drop",
+            "initialSuspicion": "-24%",
+            "verdict": "DISPROVEN",
+            "reason": "Impressions & CTR up +3.2%; drop occurs strictly post-add-to-cart."
+          },
+          {
+            "driver": "Competitor Price Undercutting",
+            "initialSuspicion": "-18%",
+            "verdict": "DISPROVEN",
+            "reason": "Scraper feed shows competitor pricing within 1.5% parity range."
+          },
+          {
+            "driver": "Brand Search Decay",
+            "initialSuspicion": "-15%",
+            "verdict": "DISPROVEN",
+            "reason": "Organic West branded search volume increased +4.8% YoY."
+          }
+        ],
+        "evidenceChain": [
+          {
+            "id": "ev-1",
+            "type": "structured",
+            "source": "ERP / Finance Ledger",
+            "badge": "Structured",
+            "icon": "database",
+            "title": "Electronics Sales Drop in West (-24.2%)",
+            "description": "Consumer Electronics revenue contracted 24.2% YoY in Pune & Mumbai retail clusters, driven by order deferrals from Tier-1 distributors.",
+            "confidenceWeight": 0.94,
+            "timestamp": "Today at 06:00 AM (7h freshness)",
+            "grain": "Daily × Region × SKU",
+            "metrics": [
+              {
+                "label": "Electronics Volume",
+                "value": "8,410 units",
+                "delta": "-24.2%"
+              },
+              {
+                "label": "Dealer Cancellations",
+                "value": "₹2.1M",
+                "delta": "+180%"
+              }
+            ],
+            "lineage": "SAP S/4HANA GL-4100 → dbt Core → InsightX Data Layer"
+          },
+          {
+            "id": "ev-2",
+            "type": "structured",
+            "source": "Operations WMS Hub (Bhiwandi & Pune)",
+            "badge": "Structured / Logs",
+            "icon": "boxes",
+            "title": "Fulfillment Latency +4.2 Days (SLA Breach 18.4%)",
+            "description": "West Regional Distribution Center dispatch turnaround climbed from 18 hours to 118 hours. 14 high-demand SKUs stalled in staging bays.",
+            "confidenceWeight": 0.91,
+            "timestamp": "Today at 12:45 PM (4m freshness)",
+            "grain": "Hourly × Facility × SKU",
+            "metrics": [
+              {
+                "label": "Avg Dispatch Latency",
+                "value": "5.1 days",
+                "delta": "+4.2 days"
+              },
+              {
+                "label": "SLA Breach Rate",
+                "value": "18.4%",
+                "delta": "+15.3% pts"
+              }
+            ],
+            "lineage": "Manhattan WMS Dispatch Webhook → InsightX Data Stream"
+          },
+          {
+            "id": "ev-3",
+            "type": "unstructured",
+            "source": "Customer Voice (Zendesk & CSAT)",
+            "badge": "Unstructured / NLP",
+            "icon": "message-circle",
+            "title": "37 VIP Dealer Delivery Complaints & Negative CSAT",
+            "description": "Escalated tickets cite 'critical stockout in retail stores during promotion weekend'. CSAT plunged from 4.6 to 3.2 in West zone.",
+            "confidenceWeight": 0.88,
+            "timestamp": "Today at 12:15 PM (35m freshness)",
+            "grain": "Ticket × Timestamp",
+            "quote": "\"We have had empty shelves for 6 days for the 55\" OLED model despite paying full invoice upfront. Cancelling PO #8892.\"",
+            "author": "Zendesk Escalation #ZD-99412 (Vijay Sales Dist.)",
+            "lineage": "Zendesk API v2 → Sentiment Embeddings → InsightX Semantic Layer"
+          },
+          {
+            "id": "ev-4",
+            "type": "unstructured",
+            "source": "Logistics & 3PL Contracts",
+            "badge": "Doc / External",
+            "icon": "file-text",
+            "title": "3PL Carrier Fleet Reduction (-35%) & NH-48 Landslide",
+            "description": "Primary logistics partner (SpeedFreight West) operating at 65% fleet availability due to local driver union dispute and NH-48 ghat road closure.",
+            "confidenceWeight": 0.82,
+            "timestamp": "Today at 11:30 AM (28m freshness)",
+            "grain": "Corridor × Hour",
+            "quote": "\"Force majeure notification: Transit delays of 48-72 hours expected across Mumbai-Pune corridor through week 34.\"",
+            "author": "SpeedFreight Logistics Ops Memo (Signed by Area Mgr)",
+            "lineage": "SharePoint Document Intelligence OCR → InsightX NLP Layer"
+          },
+          {
+            "id": "ev-5",
+            "type": "counter_signal",
+            "source": "CRM Sales & Pricing Intelligence",
+            "badge": "Counter-Signal",
+            "icon": "alert-triangle",
+            "title": "Pricing & Demand Signals Remain Healthy in East/South",
+            "description": "Catalog pricing elasticity remains stable (+0.04). East & South regions show +4.1% revenue growth with identical pricing model.",
+            "confidenceWeight": 0.96,
+            "timestamp": "Today at 12:30 PM (18m freshness)",
+            "grain": "Hourly × Opportunity",
+            "note": "Confirms issue is purely operational/supply chain rather than brand decay or competitor price cuts.",
+            "lineage": "Salesforce CRM Analytics → InsightX Semantic Layer"
+          }
+        ]
+      },
+      "validate": {
+        "confidenceScore": 78,
+        "confidenceRationale": "3 independent sources (ERP sales, WMS dispatch logs, Zendesk complaints) corroborate the logistics bottleneck as root cause. Causal link is strong observational.",
+        "signalsAlignCount": 3,
+        "causalLinkStatus": "Plausible Observational (Not Formally Proven Causal)",
+        "mathematicalBreakdown": [
+          {
+            "factor": "Independent Source Corroboration",
+            "points": "+24",
+            "detail": "3 independent sources agree on fulfillment root cause (ERP, WMS, Support)."
+          },
+          {
+            "factor": "Contribution Strength",
+            "points": "+19",
+            "detail": "Bhiwandi bottleneck explains 41% of total observed variance."
+          },
+          {
+            "factor": "Data Quality & Provenance",
+            "points": "+17",
+            "detail": "High source quality scores (ERP 96%, CRM 92%, WMS 89%)."
+          },
+          {
+            "factor": "Signal Persistence",
+            "points": "+11",
+            "detail": "14 consecutive days of sustained 3.2σ anomaly beyond baseline."
+          },
+          {
+            "factor": "Counter-Signal Penalty",
+            "points": "-8",
+            "detail": "Demand signals in East/South remain high; regional dealer panic unquantified."
+          },
+          {
+            "factor": "Historical Coverage / Sparsity",
+            "points": "-5",
+            "detail": "Minor seasonal calibration gap for newly onboarded sub-distributors."
+          }
+        ],
+        "trustChainVerification": {
+          "signalQuality": "Valid (3.2σ deviation)",
+          "evidenceTraceability": "100% lineage to SAP GL and Manhattan WMS logs",
+          "uncertaintyDisclosure": "Secondary impact from dealer inventory panic unquantified",
+          "humanOversightLevel": "Mandatory Executive Approval Gate"
+        }
+      },
+      "test": {
+        "baselineRevenue": 38.7,
+        "targetRecovery": 1.4,
+        "levers": [
+          {
+            "id": "reroute_logistics",
+            "name": "Expedite Backup 3PL Air & Express Rail",
+            "description": "Contract BlueDart Air & Container Rail to bypass NH-48 bottleneck for top 14 SKUs.",
+            "type": "slider",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "defaultValue": 80,
+            "unit": "% capacity rerouted",
+            "costPerUnit": 0.006,
+            "revenueMultiplier": 0.019
+          },
+          {
+            "id": "dealer_rebate_sla",
+            "name": "Dealer Goodwill Credit & SLA Guarantee",
+            "description": "Offer 2.5% expedited freight subsidy credit to top 40 affected wholesale dealers.",
+            "type": "toggle",
+            "defaultValue": true,
+            "cost": 0.25,
+            "revenueProtection": 0.45
+          },
+          {
+            "id": "price_discount",
+            "name": "Emergency Promotional Price Discount (-5%)",
+            "description": "Apply across-the-board 5% discount to stimulate demand.",
+            "type": "toggle",
+            "defaultValue": false,
+            "cost": 1.9,
+            "revenueProtection": 0.6,
+            "warning": "Not recommended: Demand is constrained by supply fulfillment, not price sensitivity."
+          }
+        ],
+        "explicitAssumptions": [
+          "Assumption 1: BlueDart Air turnaround is <24 hours for Pune/Mumbai hubs.",
+          "Assumption 2: 75% of delayed dealer orders will not cancel if dispatched within 48h.",
+          "Assumption 3: No further monsoon road closures on secondary state corridors.",
+          "Disclaimer: Scenario calculations are deterministic counterfactual simulations, NOT causal inference."
+        ],
+        "projectedOutput": {
+          "scenarioRevenue": 40.1,
+          "deltaRevenue": "+₹1.4M",
+          "netEbitdaDelta": "+₹0.95M",
+          "totalOpexCost": "₹0.48M",
+          "paybackDays": 6,
+          "riskLevel": "Low (High Evidence Confidence)"
+        }
+      },
+      "act": {
+        "routedGate": "REVIEW",
+        "gateRationale": "High confidence (78/100) with moderate financial reallocation (₹0.48M OpEx to recover ₹1.4M). Requires Supply Chain Director sign-off.",
+        "suggestedActions": [
+          {
+            "id": "act-1",
+            "priority": "Immediate (P0)",
+            "title": "Execute Emergency 3PL Re-routing to BlueDart Express Rail/Air",
+            "lever": "Fulfillment Capacity & 3PL Logistics",
+            "impact": "+₹1.4M Recoverable Revenue",
+            "cost": "₹0.48M OpEx",
+            "owner": "VP Supply Chain / Logistics Lead",
+            "confidence": "78/100",
+            "monitoringPlan": "Track West Electronics revenue and fulfillment turnaround daily for 14 days.",
+            "actionType": "API_DISPATCH",
+            "payload": {
+              "route": "West Hub (Bhiwandi)",
+              "carrier": "BlueDart Air Priority",
+              "skuCount": 14
+            }
+          },
+          {
+            "id": "act-2",
+            "priority": "High (P1)",
+            "title": "Automate Goodwill Credit to 37 Impacted Tier-1 Distributors",
+            "lever": "Customer Goodwill & SLA Guarantee",
+            "impact": "Protect ₹2.1M Dealer Pipeline & CSAT",
+            "cost": "₹0.15M Margin Credit",
+            "owner": "West Regional Commercial Director",
+            "confidence": "82/100",
+            "monitoringPlan": "Review distributor cancellation rate at 48h checkpoint.",
+            "actionType": "ERP_WORKFLOW",
+            "payload": {
+              "accounts": "37 Key Distributors",
+              "creditPct": "2.5%"
+            }
+          },
+          {
+            "id": "act-3",
+            "priority": "Medium (P2)",
+            "title": "Initiate 3PL Carrier SLA Penalty Clawback ($42K)",
+            "lever": "Contractual Enforcement",
+            "impact": "Contractual Cost Recovery ($42,000)",
+            "cost": "₹0",
+            "owner": "Procurement & Legal Operations",
+            "confidence": "90/100",
+            "monitoringPlan": "Audit carrier SLA logs against Master Service Agreement clause 8.4.",
+            "actionType": "LEGAL_NOTICE",
+            "payload": {
+              "vendor": "SpeedFreight West",
+              "clause": "Section 8.4 SLA Default"
+            }
+          }
+        ],
+        "auditTrail": [
+          {
+            "time": "10:14 AM",
+            "actor": "InsightX Signal Engine",
+            "action": "Detected persistent 3.2σ revenue drop in West Zone"
+          },
+          {
+            "time": "10:15 AM",
+            "actor": "InsightX Context Engine",
+            "action": "Corroborated WMS dispatch lag + 37 Zendesk complaints"
+          },
+          {
+            "time": "10:18 AM",
+            "actor": "InsightX Confidence Scorer",
+            "action": "Computed 78/100 evidence confidence; rejected pricing hypothesis"
+          },
+          {
+            "time": "10:22 AM",
+            "actor": "Scenario Simulator",
+            "action": "Modeled 3PL reroute vs -5% price cut (Reroute yields +₹1.4M delta)"
+          },
+          {
+            "time": "10:25 AM",
+            "actor": "Decision Router",
+            "action": "Routed recommendation to REVIEW gate with human sign-off requirement"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-new-product-conversion",
+      "title": "New Product Conversion Drop (-18.0%) [Abstention & Sparse History]",
+      "subtitle": "Conversion fell from 2.9% to 2.4% on newly launched 'Smart Wearables X1' line",
+      "kpiId": "kpi_conversion_rate",
+      "kpiName": "Conversion Rate — Smart Wearables X1",
+      "kpiMetric": "2.4%",
+      "kpiBaseline": "2.9%",
+      "kpiDelta": "-0.5% pts (-18.0%)",
+      "isNegative": true,
+      "timeframe": "Last 12 Days (Launch to Date)",
+      "category": "Growth & Product Marketing",
+      "severity": "Low Confidence Anomaly",
+      "isSparseHistory": true,
+      "isAbstentionScenario": true,
+      "investigationSteps": [
+        {
+          "id": 1,
+          "name": "Validating Signal Anomaly",
+          "status": "WARN",
+          "detail": "Identified 18% conversion drop, but historical sample is only 12 observations."
+        },
+        {
+          "id": 2,
+          "name": "Checking Seasonality & Baseline Drift",
+          "status": "BLOCKED",
+          "detail": "Cannot de-trend seasonality: Minimum 30 days required; observed 12 days."
+        },
+        {
+          "id": 3,
+          "name": "Reconciling Web Analytics & Pricing",
+          "status": "WARN",
+          "detail": "Pricing elasticity indicates normal willingness-to-pay; conflicting bounce rates."
+        },
+        {
+          "id": 4,
+          "name": "Checking Paid Social Traffic Quality",
+          "status": "WARN",
+          "detail": "TikTok campaign CAC jumped +40% while Meta campaign CAC remained flat."
+        },
+        {
+          "id": 5,
+          "name": "Evaluating Multi-Source Evidence",
+          "status": "ABSTAIN",
+          "detail": "Pricing signals conflict with creative attribution signals; insufficient statistical power."
+        },
+        {
+          "id": 6,
+          "name": "Computing Deterministic Confidence",
+          "status": "DONE",
+          "detail": "Computed 41/100 (Below 55 threshold). System enforces ABSTAIN / DEFER."
+        },
+        {
+          "id": 7,
+          "name": "Formulating Action Gate",
+          "status": "DONE",
+          "detail": "Gated to DEFER / REQUEST DATA. Zero hallucinated causal claims produced."
+        }
+      ],
+      "personaNarratives": {
+        "ceo": {
+          "headline": "Smart Wearables X1 conversion dropped 18% over 12 days, but confidence is LOW (41/100).",
+          "synthesis": "The system has deliberately ABSTAINED from recommending capital or price interventions because the 12-day launch history is too sparse to separate true demand decay from creative campaign volatility. Pricing and traffic-quality signals directly conflict.",
+          "recommendedFocus": "Do NOT cut product price. Request 14 more days of granular campaign conversion data before changing strategy.",
+          "decisionRights": "Executive review scheduled at Day 26 post-launch milestone."
+        },
+        "operations": {
+          "headline": "Product fulfillment turnaround is normal (1.2 days); no stockout issues detected.",
+          "synthesis": "Warehouse dispatch and inventory availability for Smart Wearables X1 are 100% green. The conversion drop is purely an upstream funnel or pricing ambiguity, not a fulfillment bottleneck.",
+          "recommendedFocus": "Maintain standard buffer inventory; no supply chain emergency action needed.",
+          "decisionRights": "Standard operating SLAs apply."
+        },
+        "marketing": {
+          "headline": "Contradictory traffic quality: TikTok Ads conversion is 1.1% while Google Search is 3.8%.",
+          "synthesis": "Aggregated 12-day conversion (2.4%) masks channel-level divergence. Blended CAC rose because TikTok spend was scaled 3x before creative fatigue stabilized.",
+          "recommendedFocus": "Break down conversion tracking by campaign creative and pause low-intent TikTok ad sets.",
+          "decisionRights": "Growth Lead authorized to run A/B landing page test."
+        },
+        "analyst": {
+          "headline": "Statistical power insufficient ($n = 12$ days, $\beta = 0.42$). Model abstains from causal attribution.",
+          "synthesis": "Sparse historical baseline prevents seasonal de-trending ($p = 0.28$). Driver variance decomposition is indeterminate: Pricing explains 22%, Ad Creative explains 31%, Random Variance explains 47%. Recommendation is DEFERRED under governance rules.",
+          "recommendedFocus": "Ingest granular session replay data and await 18 additional daily batches.",
+          "decisionRights": "Analyst approval required to validate baseline stability."
+        }
+      },
+      "detect": {
+        "signalScore": 41,
+        "signalStatus": "INSUFFICIENT HISTORY / SPARSE BASELINE",
+        "signalSummary": "Abstention triggered: 12 observations are insufficient for reliable anomaly baselining (<30 days required).",
+        "baselineChecks": [
+          {
+            "check": "Sample Size Adequacy (n ≥ 30)",
+            "status": "FAIL",
+            "detail": "Only 12 daily observations available since product launch on August 15."
+          },
+          {
+            "check": "Seasonal Baseline De-trending",
+            "status": "BLOCKED",
+            "detail": "Cannot calculate seasonal Fourier terms without at least one full 28-day cycle."
+          },
+          {
+            "check": "Signal Persistence",
+            "status": "WARN",
+            "detail": "Variance observed over 4 days; highly sensitive to single campaign budget changes."
+          },
+          {
+            "check": "Cross-Signal Consistency",
+            "status": "FAIL",
+            "detail": "Pricing elasticity (+0.02) contradicts paid traffic bounce rate surge (+14%)."
+          }
+        ],
+        "chartData": {
+          "labels": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8",
+            "D9",
+            "D10",
+            "D11",
+            "D12"
+          ],
+          "baseline": [
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9,
+            2.9
+          ],
+          "actual": [
+            2.9,
+            3.1,
+            2.8,
+            3,
+            2.7,
+            2.6,
+            2.5,
+            2.6,
+            2.4,
+            2.3,
+            2.5,
+            2.4
+          ],
+          "expectedLower": [
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5
+          ]
+        }
+      },
+      "context": {
+        "semanticEntity": "New Product Line: Smart Wearables X1 (Launch Cohort)",
+        "affectedCategories": [
+          "Smart Wearables",
+          "Accessories"
+        ],
+        "activeChannels": [
+          "TikTok Paid Video",
+          "Instagram Influencer",
+          "Google Brand Search"
+        ],
+        "connectedDataNodes": 12,
+        "crossSourceLinkages": [
+          {
+            "from": "GA4 Funnel Stream",
+            "to": "Meta Ads Manager",
+            "relation": "Checkout Dropoff at Cart (+18% bounce)"
+          },
+          {
+            "from": "TikTok Ads API",
+            "to": "Shopify Orders",
+            "relation": "High Impression Volume but Low Add-To-Cart Intent"
+          }
+        ]
+      },
+      "explain": {
+        "leadingHypothesis": "INCONCLUSIVE: Conflicting evidence between Paid Creative Traffic Quality vs Inherent Price Elasticity",
+        "hypothesisProbability": 41,
+        "causalLabel": "UNPROVEN / CONFLICTING EVIDENCE",
+        "driverContributions": [
+          {
+            "driver": "Ad Creative Channel Divergence (TikTok vs Search)",
+            "contributionPct": 31,
+            "status": "UNCONFIRMED",
+            "color": "bg-amber-500",
+            "evidence": "TikTok conversion 1.1% vs Google Search 3.8%."
+          },
+          {
+            "driver": "Product Price Sensitivity",
+            "contributionPct": 22,
+            "status": "CONTRADICTED",
+            "color": "bg-rose-500",
+            "evidence": "Price elasticity flat; competitor price index shows parity."
+          },
+          {
+            "driver": "Mobile Checkout Technical Latency",
+            "contributionPct": 15,
+            "status": "UNCONFIRMED",
+            "color": "bg-cyan-500",
+            "evidence": "iOS Safari bounce rate 3.4% higher than Android."
+          },
+          {
+            "driver": "Random Launch Noise / Sample Volatility",
+            "contributionPct": 32,
+            "status": "UNVERIFIED",
+            "color": "bg-slate-500",
+            "evidence": "High standard error due to sparse 12-day observation window."
+          }
+        ],
+        "suspectedDriversDisproven": [
+          {
+            "driver": "Inventory Out-of-Stock",
+            "initialSuspicion": "-50%",
+            "verdict": "DISPROVEN",
+            "reason": "WMS inventory availability is 100% across all hubs."
+          },
+          {
+            "driver": "Payment Gateway Failure",
+            "initialSuspicion": "-30%",
+            "verdict": "DISPROVEN",
+            "reason": "Stripe/Razorpay webhook success rate is 99.8%."
+          }
+        ],
+        "evidenceChain": [
+          {
+            "id": "sparse-ev-1",
+            "type": "structured",
+            "source": "GA4 Web Analytics",
+            "badge": "Sparse Data (12 Days)",
+            "icon": "activity",
+            "title": "Conversion Rate Inflection from 2.9% to 2.4%",
+            "description": "Total observations: 12 days. High daily variance prevents statistically significant anomaly classification at 95% confidence level.",
+            "confidenceWeight": 0.45,
+            "timestamp": "1 hour ago",
+            "grain": "Daily × Launch Cohort",
+            "metrics": [
+              {
+                "label": "Observations",
+                "value": "12 Days",
+                "delta": "Need ≥ 30"
+              },
+              {
+                "label": "Current Conversion",
+                "value": "2.4%",
+                "delta": "-18.0%"
+              }
+            ],
+            "lineage": "GA4 BigQuery Export (Unpartitioned Raw Stream)"
+          },
+          {
+            "id": "sparse-ev-2",
+            "type": "counter_signal",
+            "source": "Meta Ads & TikTok API",
+            "badge": "Conflicting Signals",
+            "icon": "alert-triangle",
+            "title": "Channel ROAS Contradiction (Search 4.2x vs TikTok 1.2x)",
+            "description": "TikTok campaign was scaled 300% on Day 8, diluting high-intent traffic with low-intent video viewers.",
+            "confidenceWeight": 0.52,
+            "timestamp": "2 hours ago",
+            "grain": "Daily × Campaign Channel",
+            "note": "Suggests the aggregate conversion drop is an artifact of paid traffic mix shift rather than product defect or price rejection.",
+            "lineage": "Ad Networks Graph API → InsightX Context Layer"
+          }
+        ]
+      },
+      "validate": {
+        "confidenceScore": 41,
+        "confidenceRationale": "We cannot confidently attribute this movement to a specific driver because historical coverage is insufficient (12 days) and pricing and traffic-quality signals conflict.",
+        "signalsAlignCount": 1,
+        "causalLinkStatus": "INSUFFICIENT EVIDENCE — ABSTENTION REQUIRED",
+        "mathematicalBreakdown": [
+          {
+            "factor": "Independent Source Corroboration",
+            "points": "+8",
+            "detail": "Only 1 single weak alignment between GA4 and TikTok ad spend."
+          },
+          {
+            "factor": "Contribution Strength",
+            "points": "+10",
+            "detail": "Primary hypothesis explains only 31% of variance (below 40% threshold)."
+          },
+          {
+            "factor": "Data Quality & Provenance",
+            "points": "+14",
+            "detail": "GA4 and ad data verified but short-duration."
+          },
+          {
+            "factor": "Signal Persistence Penalty",
+            "points": "-15",
+            "detail": "Signal observed over only 4 volatile days."
+          },
+          {
+            "factor": "Conflicting Evidence Penalty",
+            "points": "-18",
+            "detail": "Pricing elasticity directly contradicts paid ad channel hypothesis."
+          },
+          {
+            "factor": "Sparse History Penalty",
+            "points": "-25",
+            "detail": "12 days of history < 30 days mandatory minimum for time-series modeling."
+          }
+        ],
+        "trustChainVerification": {
+          "signalQuality": "LOW CONFIDENCE (High standard error)",
+          "evidenceTraceability": "Traceable to GA4 stream, but statistical power is low",
+          "uncertaintyDisclosure": "CRITICAL: System abstains from asserting root cause",
+          "humanOversightLevel": "Mandatory Growth PM & Data Science Review"
+        }
+      },
+      "test": {
+        "baselineRevenue": 2.4,
+        "targetRecovery": 0.5,
+        "levers": [
+          {
+            "id": "cut_tiktok_spend",
+            "name": "Rebalance Traffic: Throttle Low-Intent TikTok Spend (-50%)",
+            "description": "Reduce TikTok prospecting budget and reallocate to Google Search to restore traffic intent quality.",
+            "type": "slider",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "defaultValue": 50,
+            "unit": "% TikTok budget cut",
+            "costPerUnit": 0,
+            "revenueMultiplier": 0.006
+          },
+          {
+            "id": "price_slash",
+            "name": "Premature Price Cut (-15%) [High Risk / Not Recommended]",
+            "description": "Slash price to force conversion volume before establishing baseline willingness to pay.",
+            "type": "toggle",
+            "defaultValue": false,
+            "cost": 0.8,
+            "revenueProtection": 0.2,
+            "warning": "CAUTION: Unsubstantiated price cut will permanently impair product gross margin with no proven demand elasticity."
+          }
+        ],
+        "explicitAssumptions": [
+          "Assumption 1: Conversion rate drop is primarily an ad audience dilution artifact.",
+          "Assumption 2: Minimum 14 additional days of tracking required to confirm statistically significant baseline.",
+          "Disclaimer: Scenario simulations are exploratory only due to low confidence rating."
+        ],
+        "projectedOutput": {
+          "scenarioRevenue": 2.7,
+          "deltaRevenue": "+0.3% pts Conversion (Hypothetical)",
+          "netEbitdaDelta": "Neutral (Cost Neutral)",
+          "totalOpexCost": "₹0",
+          "paybackDays": "N/A",
+          "riskLevel": "High Model Uncertainty (Abstention Mode)"
+        }
+      },
+      "act": {
+        "routedGate": "DEFER / ABSTAIN",
+        "gateRationale": "Confidence score (41/100) is below the minimum threshold (55/100) for active operational intervention. Premature intervention carries high risk of margin destruction. Routed to DATA REQUEST & MONITORING.",
+        "suggestedActions": [
+          {
+            "id": "abstain-act-1",
+            "priority": "Immediate (P0)",
+            "title": "Request Additional Data Stream: 14 More Days of Granular Funnel History",
+            "lever": "Data Collection & Calibration",
+            "impact": "Establish statistically valid baseline (n ≥ 26)",
+            "cost": "₹0",
+            "owner": "Lead Data Scientist / Analytics Engineer",
+            "confidence": "41/100",
+            "monitoringPlan": "Daily automated calibration check at midnight UTC.",
+            "actionType": "DATA_REQUEST",
+            "payload": {
+              "requiredObservations": 14,
+              "targetMetric": "GA4_Session_Dropoff"
+            }
+          },
+          {
+            "id": "abstain-act-2",
+            "priority": "High (P1)",
+            "title": "Isolate Paid Traffic Experiment: Split-Test TikTok vs Google Brand Funnels",
+            "lever": "Controlled Experimentation",
+            "impact": "Disentangle channel traffic quality from product price resistance",
+            "cost": "₹0 Reallocation",
+            "owner": "Growth Marketing Lead",
+            "confidence": "52/100",
+            "monitoringPlan": "Review cohort conversion rates at Day 7 post-split.",
+            "actionType": "MARKETING_EXPERIMENT",
+            "payload": {
+              "experiment": "A/B_Channel_Intent_Split",
+              "sampleSize": "10,000 visitors"
+            }
+          }
+        ],
+        "auditTrail": [
+          {
+            "time": "08:30 AM",
+            "actor": "Signal Validator",
+            "action": "Detected -18% conversion rate movement on New Product SKU"
+          },
+          {
+            "time": "08:31 AM",
+            "actor": "Sparsity Guard",
+            "action": "Flagged history length (12 days) below minimum 30-day threshold"
+          },
+          {
+            "time": "08:33 AM",
+            "actor": "Confidence Engine",
+            "action": "Computed 41/100 confidence; triggered MANDATORY ABSTENTION"
+          },
+          {
+            "time": "08:35 AM",
+            "actor": "Decision Router",
+            "action": "Routed recommendation to DEFER / REQUEST DATA gate"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-d2c-margin",
+      "title": "D2C Blended Gross Margin Compression (-7.2% pts) [Actionable]",
+      "subtitle": "Gross Margin compressed from 28.4% to 21.2% due to Meta CAC surges and Freight Surcharges",
+      "kpiId": "kpi_gross_margin",
+      "kpiName": "Blended Gross Margin — D2C Portfolio",
+      "kpiMetric": "21.2%",
+      "kpiBaseline": "28.4%",
+      "kpiDelta": "-7.2% pts (-25.3%)",
+      "isNegative": true,
+      "timeframe": "Last 30 Days",
+      "category": "D2C Retail & Sourcing",
+      "severity": "Material Margin Erosion",
+      "isSparseHistory": false,
+      "isAbstentionScenario": false,
+      "investigationSteps": [
+        {
+          "id": 1,
+          "name": "Validating Signal Anomaly",
+          "status": "DONE",
+          "detail": "Confirmed 4.0σ compression in contribution margin over 30 days."
+        },
+        {
+          "id": 2,
+          "name": "Checking Seasonality",
+          "status": "DONE",
+          "detail": "Verified non-promotional period; normal gross margin baseline is 28.4%."
+        },
+        {
+          "id": 3,
+          "name": "Decomposing COGS & Marketing",
+          "status": "DONE",
+          "detail": "Triangulated Meta Ads CAC spike (+43.7%) and Red Sea ocean freight surcharge (+$450/FEU)."
+        },
+        {
+          "id": 4,
+          "name": "Verifying Pricing Counter-Signals",
+          "status": "DONE",
+          "detail": "Average order value (AOV) is +2.8% higher; discounts were NOT increased."
+        },
+        {
+          "id": 5,
+          "name": "Computing Deterministic Confidence",
+          "status": "DONE",
+          "detail": "Assigned 81/100 confidence; high multi-source accounting lineage."
+        },
+        {
+          "id": 6,
+          "name": "Simulating Channel Rebalance & Basket Floor",
+          "status": "DONE",
+          "detail": "Reallocating 35% Meta spend to Search + ₹1,999 free shipping floor recovers +5.2% pts margin."
+        },
+        {
+          "id": 7,
+          "name": "Formulating Decision Route",
+          "status": "DONE",
+          "detail": "Routed to RECOMMEND gate with low execution risk."
+        }
+      ],
+      "personaNarratives": {
+        "ceo": {
+          "headline": "D2C Gross Margin compressed 7.2% pts (down to 21.2%), driven by Meta ad auction inflation and ocean shipping.",
+          "synthesis": "The margin erosion is mathematically isolated to paid customer acquisition cost surges (+43.7%) and ocean container fuel surcharges. Product pricing and customer basket sizes remain resilient. Ready for immediate execution.",
+          "recommendedFocus": "Approve marketing channel rebalance (Meta → Google Search/Affiliate) and raise free shipping cutoff to ₹1,999.",
+          "decisionRights": "CMO & Sourcing Director authorized to execute."
+        },
+        "operations": {
+          "headline": "Inbound ocean container freight rose $450/FEU with port dwell times up +3.2 days.",
+          "synthesis": "Red Sea logistics rerouting added transit delays and fuel surcharges. Raising the free shipping basket threshold absorbs this freight cost without hurting conversion.",
+          "recommendedFocus": "Renegotiate spot container rates with freight forwarder and optimize pallet density.",
+          "decisionRights": "VP Logistics authorized to reallocate 3PL freight allocations."
+        },
+        "marketing": {
+          "headline": "Meta Ads blended CAC climbed from ₹480 to ₹690 per order (ROAS declined from 3.4x to 2.1x).",
+          "synthesis": "Creative fatigue and auction bidding density on Instagram eroded unit economics. High-intent Google Search and Creator Affiliates continue to deliver 3.8x ROAS.",
+          "recommendedFocus": "Shift 35% of Meta prospecting budget into Google High-Intent Search and Creator Affiliates.",
+          "decisionRights": "Performance Marketing Lead authorized to rebalance weekly ad spend."
+        },
+        "analyst": {
+          "headline": "Multi-source variance decomposition attributes 58% of margin dip to Meta CAC and 34% to ocean freight.",
+          "synthesis": "Linear regression model shows $R^2 = 0.91$ with invoice-level lineage to SAP COGS and Meta Graph API. Confidence score is 81/100. Causal mechanisms are empirically verified.",
+          "recommendedFocus": "Monitor CAC stabilization curve and track AOV elasticity following shipping threshold change.",
+          "decisionRights": "Analytics sign-off on scenario payback model."
+        }
+      },
+      "detect": {
+        "signalScore": 95,
+        "signalStatus": "CONFIRMED COMPRESSION ANOMALY",
+        "signalSummary": "Margin degradation sustained across 4 primary SKU families over 30 days.",
+        "baselineChecks": [
+          {
+            "check": "Cost Volatility Filter",
+            "status": "FAIL",
+            "detail": "Unit ocean container shipping cost jumped +38% due to Red Sea fuel surcharge."
+          },
+          {
+            "check": "Ad Spend CAC Spike",
+            "status": "FAIL",
+            "detail": "Meta Ads blended CAC rose from ₹480 to ₹690 per acquired order."
+          },
+          {
+            "check": "Signal Persistence",
+            "status": "PASS",
+            "detail": "Margin compression persistent across 4 consecutive weekly accounting closes."
+          }
+        ],
+        "chartData": {
+          "labels": [
+            "W1",
+            "W2",
+            "W3",
+            "W4"
+          ],
+          "baseline": [
+            28.4,
+            28.3,
+            28.5,
+            28.4
+          ],
+          "actual": [
+            27.1,
+            24.8,
+            22.5,
+            21.2
+          ],
+          "expectedLower": [
+            26.5,
+            26.5,
+            26.5,
+            26.5
+          ]
+        }
+      },
+      "context": {
+        "semanticEntity": "D2C Fashion & Athleisure Portfolio (National E-Commerce)",
+        "affectedCategories": [
+          "Technical Footwear (-9.4% pts)",
+          "Outerwear (-6.8% pts)",
+          "Activewear (-3.2% pts)"
+        ],
+        "activeChannels": [
+          "Instagram / Meta Ads",
+          "Direct Web Storefront",
+          "Google Search Ads"
+        ],
+        "connectedDataNodes": 24,
+        "crossSourceLinkages": [
+          {
+            "from": "Meta Ads Manager",
+            "to": "Shopify Orders",
+            "relation": "CAC increased 43.7% following auction inflation"
+          },
+          {
+            "from": "Customs & Freight Invoices",
+            "to": "SAP COGS Ledger",
+            "relation": "Bunker Fuel Surcharge +$450/container"
+          }
+        ]
+      },
+      "explain": {
+        "leadingHypothesis": "Simultaneous paid customer acquisition cost increase (Meta auction inflation) + Ocean freight fuel surcharge squeezed unit contribution margin.",
+        "hypothesisProbability": 91,
+        "causalLabel": "Empirically Verified Accounting Causality",
+        "driverContributions": [
+          {
+            "driver": "Meta Ads CAC Auction Inflation",
+            "contributionPct": 58,
+            "status": "CORROBORATED",
+            "color": "bg-purple-500",
+            "evidence": "Blended CAC increased from ₹480 to ₹690."
+          },
+          {
+            "driver": "Ocean Container Freight Surcharge",
+            "contributionPct": 34,
+            "status": "CORROBORATED",
+            "color": "bg-cyan-500",
+            "evidence": "Bunker surcharge added $450 per 40ft container."
+          },
+          {
+            "driver": "Packaging Material Cost Drift",
+            "contributionPct": 5,
+            "status": "CORROBORATED",
+            "color": "bg-indigo-500",
+            "evidence": "Recycled corrugated box pricing rose +8%."
+          },
+          {
+            "driver": "Residual Category Variance",
+            "contributionPct": 3,
+            "status": "NOISE",
+            "color": "bg-slate-500",
+            "evidence": "Unaccounted statistical noise."
+          }
+        ],
+        "suspectedDriversDisproven": [
+          {
+            "driver": "Customer Discounting / Promo Leakage",
+            "initialSuspicion": "-25%",
+            "verdict": "DISPROVEN",
+            "reason": "Average order value (AOV) was actually +2.8% higher."
+          },
+          {
+            "driver": "Product Return Costs",
+            "initialSuspicion": "-15%",
+            "verdict": "DISPROVEN",
+            "reason": "Return rate remained flat at 3.1%."
+          }
+        ],
+        "evidenceChain": [
+          {
+            "id": "d2c-ev-1",
+            "type": "structured",
+            "source": "Meta Ads & GA4 Attribution",
+            "badge": "Marketing",
+            "icon": "megaphone",
+            "title": "Paid CAC Escalated by +43.7% (₹480 → ₹690)",
+            "description": "Ad frequency fatigue and high bidding density reduced ROAS from 3.4x to 2.1x across top 3 campaigns.",
+            "confidenceWeight": 0.95,
+            "timestamp": "15 min ago",
+            "grain": "Hourly × Campaign",
+            "metrics": [
+              {
+                "label": "Blended CAC",
+                "value": "₹690",
+                "delta": "+43.7%"
+              },
+              {
+                "label": "Blended ROAS",
+                "value": "2.1x",
+                "delta": "-38.2%"
+              }
+            ],
+            "lineage": "Meta Graph API v19.0 → BigQuery → InsightX Semantic Layer"
+          },
+          {
+            "id": "d2c-ev-2",
+            "type": "structured",
+            "source": "ERP Logistics / Invoices",
+            "badge": "Finance / Freight",
+            "icon": "truck",
+            "title": "Container Inbound Surcharge +$450/FEU",
+            "description": "Red Sea rerouting added 14 days and $450 bunker surcharge per 40ft container.",
+            "confidenceWeight": 0.93,
+            "timestamp": "7 hours ago",
+            "grain": "Order × Freight Forwarder",
+            "metrics": [
+              {
+                "label": "Container Rate",
+                "value": "$3,850",
+                "delta": "+28.3%"
+              },
+              {
+                "label": "Port Dwell Time",
+                "value": "8.4 days",
+                "delta": "+3.2 days"
+              }
+            ],
+            "lineage": "SAP S/4HANA COGS → Manhattan WMS → InsightX Data Layer"
+          }
+        ]
+      },
+      "validate": {
+        "confidenceScore": 81,
+        "confidenceRationale": "High multi-source corroboration between Shopify margin reports, Meta spend logs, and freight invoices.",
+        "signalsAlignCount": 3,
+        "causalLinkStatus": "Empirically Verified Accounting Lineage",
+        "mathematicalBreakdown": [
+          {
+            "factor": "Independent Source Corroboration",
+            "points": "+26",
+            "detail": "3 independent sources agree on CAC and freight margin squeeze (Shopify, Meta, SAP)."
+          },
+          {
+            "factor": "Contribution Strength",
+            "points": "+22",
+            "detail": "Meta CAC explains 58% and Freight explains 34% of variance ($R^2 = 0.91$)."
+          },
+          {
+            "factor": "Data Quality & Provenance",
+            "points": "+18",
+            "detail": "100% verified accounting invoice records."
+          },
+          {
+            "factor": "Signal Persistence",
+            "points": "+15",
+            "detail": "30 continuous days of margin trend."
+          },
+          {
+            "factor": "Counter-Signal Resolution",
+            "points": "+0",
+            "detail": "Promo discounting hypothesis conclusively disproven."
+          }
+        ],
+        "trustChainVerification": {
+          "signalQuality": "Valid (4.0σ Deviation)",
+          "evidenceTraceability": "100% mapped to Meta Graph API and SAP Invoices",
+          "uncertaintyDisclosure": "Holiday ad bid rates may soften CAC volatility",
+          "humanOversightLevel": "Chief Marketing Officer & VP Sourcing"
+        }
+      },
+      "test": {
+        "baselineRevenue": 21.2,
+        "targetRecovery": 4.8,
+        "levers": [
+          {
+            "id": "shift_ad_channels",
+            "name": "Rebalance Meta Spend to Google Search & Influencer Affiliate",
+            "description": "Shift 35% of top-of-funnel Meta budget to high-intent Search and creator affiliates.",
+            "type": "slider",
+            "min": 0,
+            "max": 50,
+            "step": 5,
+            "defaultValue": 35,
+            "unit": "% budget reallocated",
+            "costPerUnit": 0.01,
+            "revenueMultiplier": 0.08
+          },
+          {
+            "id": "bundle_pricing",
+            "name": "Introduce Free Shipping Floor Threshold (₹1,999)",
+            "description": "Raise free shipping cutoff from ₹999 to ₹1,999 to absorb freight surcharge into higher basket size.",
+            "type": "toggle",
+            "defaultValue": true,
+            "cost": 0.08,
+            "revenueProtection": 1.8
+          }
+        ],
+        "explicitAssumptions": [
+          "Assumption 1: Affiliate CPA remains capped at 18% rev share.",
+          "Assumption 2: Increasing free shipping threshold lifts AOV by at least ₹250."
+        ],
+        "projectedOutput": {
+          "scenarioRevenue": 26.4,
+          "deltaRevenue": "+5.2% pts Margin",
+          "netEbitdaDelta": "+₹3.8M Net Profit",
+          "totalOpexCost": "₹0 Budget Increase",
+          "paybackDays": 10,
+          "riskLevel": "Low (Direct Actionable)"
+        }
+      },
+      "act": {
+        "routedGate": "RECOMMEND",
+        "gateRationale": "Low implementation risk with strong projected margin recovery (+5.2% pts). Ready for direct policy execution.",
+        "suggestedActions": [
+          {
+            "id": "d2c-act-1",
+            "priority": "Immediate (P0)",
+            "title": "Adjust Marketing Channel Allocations (Meta → Google/Affiliate)",
+            "lever": "Channel Mix & ROAS Efficiency",
+            "impact": "Reduces blended CAC from ₹690 to ₹520 (+2.8% pts Margin)",
+            "cost": "₹0 Budget Increase",
+            "owner": "Performance Marketing Lead",
+            "confidence": "86/100",
+            "monitoringPlan": "Monitor daily blended CAC and ROAS in GA4 dashboard.",
+            "actionType": "MARKETING_API",
+            "payload": {
+              "shiftPct": 35,
+              "targetROAS": 2.9
+            }
+          },
+          {
+            "id": "d2c-act-2",
+            "priority": "High (P1)",
+            "title": "Update Shopify Cart Free Shipping Threshold to ₹1,999",
+            "lever": "Average Order Value (AOV) & Freight Absorption",
+            "impact": "Lifts AOV and absorbs $450/FEU freight surcharge (+2.4% pts Margin)",
+            "cost": "₹0",
+            "owner": "E-Commerce Director",
+            "confidence": "82/100",
+            "monitoringPlan": "Track cart abandonment rate at checkout step for 7 days.",
+            "actionType": "STORE_CONFIG",
+            "payload": {
+              "minCartValue": 1999
+            }
+          }
+        ],
+        "auditTrail": [
+          {
+            "time": "02:15 PM",
+            "actor": "Margin Tracker",
+            "action": "Flagged -7.2% pts compression in gross margin"
+          },
+          {
+            "time": "02:18 PM",
+            "actor": "InsightX Context Engine",
+            "action": "Triangulated Meta CAC surge with ocean freight invoices"
+          },
+          {
+            "time": "02:22 PM",
+            "actor": "Policy Router",
+            "action": "Automated routing to RECOMMEND gate"
+          }
+        ]
+      }
+    }
+  ],
+  "aiArchitecture": {
+    "title": "AI Architecture & Separation of Concerns",
+    "description": "Strict governance boundary ensuring LLMs never invent numerical values, while deterministic logic and statistical models provide mathematical truth.",
+    "layers": [
+      {
+        "layer": "DETERMINISTIC CALCULATION",
+        "badge": "badge-purple",
+        "color": "border-purple-500/40 bg-purple-950/20",
+        "responsibilities": [
+          "Authoritative numerical KPI calculations (SUM, AVG, Ratio of Sums)",
+          "14-day & 30-day rolling baseline arithmetic and expected confidence bounds",
+          "Materiality score calculations and threshold breach checks",
+          "What-If counterfactual simulator arithmetic (Revenue, EBITDA, Payback Days)",
+          "Role-based access control (RBAC) permission enforcement"
+        ],
+        "techStack": "Deterministic Python / TypeScript Engine, SQL, DuckDB"
+      },
+      {
+        "layer": "STATISTICS & ML",
+        "badge": "badge-cyan",
+        "color": "border-cyan-500/40 bg-cyan-950/20",
+        "responsibilities": [
+          "Time-series seasonal de-trending and Fourier decomposition",
+          "Statistical anomaly z-score calculation ($3.2\\sigma$ variance detection)",
+          "Horizontal driver contribution decomposition (ANOVA / regression variance share)",
+          "Deterministic confidence scoring formula combining corroboration, quality & penalties"
+        ],
+        "techStack": "SciPy, NumPy, Scikit-learn, Statsmodels"
+      },
+      {
+        "layer": "SEMANTIC RETRIEVAL & CONTEXT",
+        "badge": "badge-emerald",
+        "color": "border-emerald-500/40 bg-emerald-950/20",
+        "responsibilities": [
+          "KPI Semantic Contract resolution (SLAs, formulas, grain, ownership)",
+          "Cross-domain entity resolution across ERP, CRM, WMS, and Support",
+          "Source provenance, lineage tracking, and cryptographic audit hashing"
+        ],
+        "techStack": "Vector Embeddings, Semantic Graph Registry, Redis Cache"
+      },
+      {
+        "layer": "LLM SYNTHESIS & ORCHESTRATION",
+        "badge": "badge-amber",
+        "color": "border-amber-500/40 bg-amber-950/20",
+        "responsibilities": [
+          "Investigation orchestration and workflow intent interpretation",
+          "Persona-adaptive narrative synthesis (CEO vs Ops vs Marketing vs Analyst)",
+          "Action explanation and plain-English business brief generation",
+          "Explaining disproven hypotheses and evidence contradictions without fabricating numbers"
+        ],
+        "techStack": "Gemini 1.5 Pro / Flash Reasoning Abstraction Layer"
+      }
+    ]
+  },
+  "telemetry": {
+    "totalLatencyMs": 2420,
+    "breakdown": {
+      "dataQueryMs": 140,
+      "analyticsMs": 85,
+      "retrievalMs": 110,
+      "llmSynthesisMs": 2085
+    },
+    "llmCallsCount": 2,
+    "inputTokens": 3420,
+    "outputTokens": 820,
+    "estimatedCostUsd": 0.0031,
+    "cacheStatus": "CACHE HIT (85% sub-query hit rate)",
+    "sourcesConsultedCount": 5,
+    "evidenceNodesCount": 14,
+    "auditHash": "sha256:8f92e01a9b3d4f892c55e902b11e"
+  },
+  "feedbackRepository": [
+    {
+      "id": "fb-101",
+      "user": "Aritra Gupta (Lead Data Scientist)",
+      "role": "Analyst",
+      "insightId": "scenario-west-revenue",
+      "hypothesis": "West fulfillment disruption & warehouse bottleneck",
+      "feedbackType": "ACCEPTED_CORRECT",
+      "rating": "5/5",
+      "comments": "Corroborated 100% with Manhattan WMS dispatch logs and SpeedFreight strike memo.",
+      "timestamp": "2026-08-27T10:30:00Z",
+      "calibrationImpact": "Reinforced 3PL logistics weight +0.02"
+    },
+    {
+      "id": "fb-102",
+      "user": "Abhishek Anand (VP Product)",
+      "role": "CEO / Executive",
+      "insightId": "scenario-new-product-conversion",
+      "hypothesis": "Abstention on 12-day launch conversion dip",
+      "feedbackType": "RECOMMENDATION_USEFUL",
+      "rating": "5/5",
+      "comments": "Prevented premature price cut on new wearables line. Saved ~₹1.2M in margin erosion.",
+      "timestamp": "2026-08-27T11:15:00Z",
+      "calibrationImpact": "Verified 30-day minimum sparsity guardrail"
+    },
+    {
+      "id": "fb-103",
+      "user": "Abhishek Biradar (Operations Director)",
+      "role": "Operations",
+      "insightId": "scenario-d2c-margin",
+      "hypothesis": "Ocean container fuel surcharge impact",
+      "feedbackType": "ACCEPTED_CORRECT",
+      "rating": "4/5",
+      "comments": "Free shipping floor increase to ₹1,999 absorbed the $450/FEU freight surcharge within 6 days.",
+      "timestamp": "2026-08-27T12:00:00Z",
+      "calibrationImpact": "Updated AOV elasticity coefficients"
+    }
+  ]
+}

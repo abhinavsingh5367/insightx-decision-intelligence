@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUSINESSINTELLIGENCE.AI — From KPI Movement to Trusted Business Action</title>
+  
+  <!-- Meta tags for SEO & Rich Preview -->
+  <meta name="description" content="BUSINESSINTELLIGENCE.AI: Evidence-Backed Decision Intelligence Platform for Accenture Innovation Challenge 2026 Round 2. Turning What Changed into Why and What can we confidently do next.">
+  <meta name="author" content="Team InsightX: Aritra Gupta, Abhishek Anand, Abhishek Biradar">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Design System Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#060911] text-slate-100 antialiased min-h-screen flex flex-col selection:bg-purple-600 selection:text-white">
+
+  <!-- ========================================================================= -->
+  <!-- TOP APP HEADER & BRANDING BAR -->
+  <!-- ========================================================================= -->
+  <header class="top-navbar px-4 sm:px-8 flex items-center justify-between border-b border-slate-800/80 bg-[#080d1a]/95 backdrop-blur-xl sticky top-0 z-50">
+    <!-- Brand Mark & Title -->
+    <div class="flex items-center gap-3.5 cursor-pointer" onclick="window.biApp.setView('landing')">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-purple-400 p-[1px] shadow-lg shadow-purple-500/25">
+        <div class="w-full h-full bg-[#0d1322] rounded-[11px] flex items-center justify-center">
+          <span class="font-extrabold text-base text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300 font-mono">BI</span>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-base font-extrabold tracking-tight text-white flex items-center gap-1.5 font-mono">
+            <span>BUSINESSINTELLIGENCE.AI</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-800/60 font-mono">AIC '26</span>
+          </h1>
+        </div>
+        <p class="text-[11px] text-slate-400">
+          <span class="text-purple-300 font-medium">“From KPI movement to trusted business action”</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Center / Right: Streamlined Global Controls -->
+    <div class="flex items-center gap-3">
+      <!-- Scenario Selector Dropdown -->
+      <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-lg shadow-sm">
+        <span class="text-xs text-slate-400 font-medium hidden md:inline">Scenario:</span>
+        <select id="scenarioSelect" class="bg-transparent text-xs font-semibold text-purple-300 focus:outline-none cursor-pointer">
+          <option value="scenario-west-revenue" class="bg-slate-900 text-slate-100">Scenario A: West Revenue Dip (-8.1%) [Hero]</option>
+          <option value="scenario-new-product-conversion" class="bg-slate-900 text-slate-100">Scenario B: New Product Conversion (-18%) [Abstain/Sparse]</option>
+          <option value="scenario-d2c-margin" class="bg-slate-900 text-slate-100">Scenario C: D2C Gross Margin Compression (-7.2%) [Actionable]</option>
+        </select>
+      </div>
+
+      <!-- Persona Selector Dropdown -->
+      <div class="flex items-center gap-1.5 bg-slate-900/90 border border-purple-500/40 px-3 py-1.5 rounded-lg shadow-sm shadow-purple-500/10">
+        <span class="text-xs text-purple-300 font-semibold hidden md:inline">Role:</span>
+        <select id="personaSelect" class="bg-transparent text-xs font-bold text-slate-100 focus:outline-none cursor-pointer">
+          <option value="ceo" class="bg-slate-900 text-slate-100">CEO / Executive</option>
+          <option value="operations" class="bg-slate-900 text-slate-100">Operations Leader</option>
+          <option value="marketing" class="bg-slate-900 text-slate-100">Marketing Leader</option>
+          <option value="analyst" class="bg-slate-900 text-slate-100">Data Scientist / Analyst</option>
+        </select>
+      </div>
+
+      <!-- Run Investigation CTA Button -->
+      <button class="btn-primary text-xs py-1.5 px-3.5 flex items-center gap-1.5" onclick="window.biApp.runGuidedInvestigation()">
+        <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+        <span class="font-bold">Run Investigation</span>
+      </button>
+
+      <!-- Export Brief Button -->
+      <button class="btn-outline text-xs py-1.5 px-3 hidden sm:flex items-center gap-1.5" onclick="window.biApp.printExecutiveBrief()">
+        <i data-lucide="file-text" class="w-3.5 h-3.5 text-slate-400"></i>
+        <span>Export Brief</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- STREAMLINED PRIMARY NAVIGATION BAR (5 CLEAN PRIMARY SECTIONS) -->
+  <!-- ========================================================================= -->
+  <nav class="bg-[#0b1122] border-b border-slate-800/80 px-4 sm:px-8 py-2 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-2 overflow-x-auto min-w-max">
+      <button class="nav-tab-link active" data-view="command_center" onclick="window.biApp.setView('command_center')">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+        <span>Command Center</span>
+      </button>
+
+      <button class="nav-tab-link" data-view="investigate" onclick="window.biApp.setView('investigate')">
+        <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+        <span>Investigation Hub</span>
+      </button>
+
+      <button class="nav-tab-link" data-view="sandbox" onclick="window.biApp.setView('sandbox')">
+        <i data-lucide="sliders" class="w-4 h-4 text-emerald-400"></i>
+        <span>Decision Lab (What-If)</span>
+      </button>
+
+      <button class="nav-tab-link" data-view="gate" onclick="window.biApp.setView('gate')">
+        <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400"></i>
+        <span>Action Center</span>
+      </button>
+
+      <button class="nav-tab-link" data-view="governance" onclick="window.biApp.setView('governance')">
+        <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400"></i>
+        <span>Governance & Observability</span>
+      </button>
+    </div>
+
+    <!-- Quick Landing Overview Link -->
+    <button class="text-xs font-semibold text-slate-400 hover:text-purple-300 transition-colors flex items-center gap-1 hidden lg:flex" onclick="window.biApp.setView('landing')">
+      <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+      <span>Product Overview</span>
+    </button>
+  </nav>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN WORKSPACE CONTAINER -->
+  <!-- ========================================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-8">
+
+    <!-- ======================================================================= -->
+    <!-- VIEW: LANDING / PRODUCT OVERVIEW SHOWCASE -->
+    <!-- ======================================================================= -->
+    <div id="view_landing" class="hidden space-y-8 py-4">
+      <!-- Hero Value Proposition -->
+      <div class="text-center max-w-4xl mx-auto space-y-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/80 border border-purple-600/50 text-xs font-semibold text-purple-300 font-mono">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+          <span>Accenture Innovation Challenge 2026 • Round 2</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          From KPI Movement to <span class="gradient-text-purple">Trusted Business Action.</span>
+        </h2>
+        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          Conventional BI tells you <span class="text-purple-300 font-semibold">what changed</span>. 
+          <span class="text-white font-bold">BUSINESSINTELLIGENCE.AI</span> connects multi-source evidence, quantifies uncertainty, models counterfactual scenarios, and recommends authorized human actions.
+        </p>
+        
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <button class="btn-primary px-6 py-3 text-sm font-bold shadow-lg shadow-purple-500/25" onclick="window.biApp.setView('command_center')">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+            <span>Launch Command Center</span>
+          </button>
+          <button class="btn-outline px-6 py-3 text-sm font-semibold" onclick="window.biApp.runGuidedInvestigation()">
+            <i data-lucide="play" class="w-4 h-4 text-purple-400"></i>
+            <span>Experience Live Investigation</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Miniature Investigation Pipeline Walkthrough -->
+      <div class="glass-panel p-6 sm:p-8 border-purple-500/30 relative overflow-hidden">
+        <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-purple-600/10 blur-3xl pointer-events-none"></div>
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-slate-100 flex items-center gap-2">
+              <span>Live 6-Stage Intelligence Flow</span>
+              <span class="badge badge-purple text-xs font-mono">End-to-End Trace</span>
+            </h3>
+            <p class="text-xs text-slate-400">How the engine autonomously reconciles the West Region Revenue Dip.</p>
+          </div>
+          <span class="text-xs font-mono text-emerald-400">Deterministic + Statistical Truth</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3.5 pt-5">
+          <!-- Step 1 -->
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono font-bold text-purple-400 uppercase">01. Anomaly Detect</span>
+              <span class="badge badge-rose text-[9px]">3.2σ Breach</span>
+            </div>
+            <div class="text-lg font-bold text-rose-400 font-mono">Revenue ↓8.1%</div>
+            <p class="text-xs text-slate-400">West zone revenue dropped ₹3.4M; de-trended seasonal baseline.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase">02. Multi-Source</span>
+              <span class="badge badge-cyan text-[9px]">3 Systems</span>
+            </div>
+            <div class="text-sm font-bold text-slate-200">ERP + WMS + Voice</div>
+            <p class="text-xs text-slate-400">Triangulated ₹2.1M dealer cancellations with Bhiwandi hub 118h dispatch lag.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono font-bold text-purple-400 uppercase">03. Driver Share</span>
+              <span class="badge badge-purple text-[9px]">41% Share</span>
+            </div>
+            <div class="text-sm font-bold text-purple-300">WMS Bottleneck</div>
+            <p class="text-xs text-slate-400">ANOVA variance share isolates fulfillment lag. Pricing disproven.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase">04. Confidence</span>
+              <span class="badge badge-emerald text-[9px]">78/100 Conf</span>
+            </div>
+            <div class="text-sm font-bold text-emerald-300">Evidence Validated</div>
+            <p class="text-xs text-slate-400">Mathematical confidence derived outside LLM. Observational link verified.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-purple-500/40 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono font-bold text-purple-300 uppercase">05. Test & Act</span>
+              <span class="badge badge-amber text-[9px]">REVIEW Gate</span>
+            </div>
+            <div class="text-sm font-bold text-slate-100">+₹1.4M Recovery</div>
+            <p class="text-xs text-slate-400">Modeled BlueDart 3PL air rerouting. Dispatched authorized action playbook.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Core Trust Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-panel p-5 space-y-2.5">
+          <div class="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-100">01. Signal-Validated</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Eliminates alert fatigue by separating genuine structural anomalies from seasonal variance and baseline drift.
+          </p>
+        </div>
+
+        <div class="glass-panel p-5 space-y-2.5">
+          <div class="w-9 h-9 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+            <i data-lucide="network" class="w-5 h-5"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-100">02. Evidence-Grounded</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Connects structured ERP/CRM records with customer voice and logistics telematics into an interactive evidence graph.
+          </p>
+        </div>
+
+        <div class="glass-panel p-5 space-y-2.5">
+          <div class="w-9 h-9 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+            <i data-lucide="help-circle" class="w-5 h-5"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-100">03. Uncertainty-Aware</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Explicitly abstains and gates to DEFER when data is sparse or signals conflict. Never hallucinates causal certainty.
+          </p>
+        </div>
+
+        <div class="glass-panel p-5 space-y-2.5">
+          <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-100">04. Human-Controlled</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Simulates counterfactual business levers before taking action, routing authorized playbooks through human approval gates.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 1: EXECUTIVE COMMAND CENTER -->
+    <!-- ======================================================================= -->
+    <div id="view_command_center" class="space-y-8">
+      <!-- Welcome & Filters Row -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-panel p-5">
+        <div>
+          <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+            <span>Executive Command Center</span>
+            <span class="badge badge-purple text-xs font-mono">Real-Time Sync</span>
+          </h2>
+          <p class="text-xs text-slate-400">Authoritative KPI health monitoring with deterministic priority signal scoring.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs flex items-center gap-2">
+            <span class="text-slate-400">Region:</span>
+            <span class="font-bold text-purple-300">West Region (MH/GJ/GA)</span>
+          </div>
+          <div class="px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-emerald-400 text-xs font-mono flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Streams Healthy (4m ago)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Connected Core KPI Cards Grid -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Monitored Enterprise KPIs (Click to Investigate)</h3>
+          <span class="text-xs font-mono text-purple-300">5 KPIs Synced</span>
+        </div>
+        <div id="commandCenterKpisGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <!-- Dynamically populated KPI cards with sparklines -->
+        </div>
+      </div>
+
+      <!-- Deterministic Priority Signals Section -->
+      <div class="glass-panel p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+          <div>
+            <h3 class="text-sm font-bold text-slate-100 flex items-center gap-2">
+              <i data-lucide="alert-octagon" class="w-4 h-4 text-purple-400"></i>
+              <span>Priority Signals Queue</span>
+            </h3>
+            <p class="text-xs text-slate-400">Deterministically ranked by: $0.35 \times \text{Impact} + 0.25 \times \text{Anomaly} + 0.20 \times \text{Persistence} + 0.20 \times \text{Strategic Importance}$.</p>
+          </div>
+          <span class="badge badge-purple text-xs font-mono">Deterministic Ranking</span>
+        </div>
+
+        <div id="prioritySignalsList" class="space-y-3">
+          <!-- Dynamically populated signals -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 2: HERO INVESTIGATION HUB (STREAMLINED & PROGRESSIVE) -->
+    <!-- ======================================================================= -->
+    <div id="view_investigate" class="hidden space-y-6">
+
+      <!-- Hero KPI Summary Banner -->
+      <section class="glass-panel p-6 relative overflow-hidden border-purple-500/40">
+        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-purple-600/10 blur-3xl pointer-events-none"></div>
+        
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <!-- Left: KPI Metric Value & Movement -->
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="badge badge-purple text-xs font-mono">Active Investigation</span>
+              <span id="signalScoreBadge" class="badge badge-emerald text-xs font-mono">Signal: 92/100</span>
+              <span id="confScoreBadge" class="badge badge-cyan text-xs font-mono">Confidence: 78/100</span>
+              <span id="topGateBadge" class="badge badge-amber text-xs font-mono">ROUTE: REVIEW</span>
+              <span id="abstentionNoticeBadge" class="badge badge-rose text-xs font-mono hidden">ABSTENTION REQUIRED</span>
+            </div>
+            
+            <div class="flex flex-wrap items-baseline gap-4 pt-1">
+              <h2 id="kpiCardTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-100">Revenue — West Region</h2>
+              <div class="flex items-center gap-3">
+                <span id="kpiCardCurrent" class="metric-value-huge text-rose-400 font-mono">₹38.7M</span>
+                <div class="space-y-0.5">
+                  <span id="kpiCardDelta" class="delta-pill negative">-₹3.4M (-8.1%)</span>
+                  <div id="kpiCardBaseline" class="text-xs text-slate-400 font-mono">Baseline: ₹42.1M</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Actions -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button class="btn-primary text-xs py-2 px-4 shadow-md shadow-purple-500/20" onclick="window.biApp.runGuidedInvestigation()">
+              <i data-lucide="play-circle" class="w-4 h-4"></i>
+              <span class="font-bold">Run 10-Step Investigation</span>
+            </button>
+            <button class="btn-outline text-xs py-2 px-3" onclick="window.biApp.openContractDrawer('kpi_revenue')">
+              <i data-lucide="book-open" class="w-3.5 h-3.5 text-cyan-400"></i>
+              <span>Semantic Contract</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Persona-Adaptive Narrative Card -->
+        <div class="mt-5 pt-5 border-t border-slate-800/80 grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div class="lg:col-span-8 space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-purple-400 uppercase tracking-wider font-mono flex items-center gap-1">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-400"></i>
+                <span id="personaNarrativeTitle">Persona-Specific Intelligence Synthesis (CEO / Executive)</span>
+              </span>
+              <span class="text-[10px] text-slate-500 font-mono">• LLM Synthesis (Numerical Data Authoritative)</span>
+            </div>
+            <p id="personaHeadline" class="text-sm font-bold text-slate-100 leading-snug">
+              West revenue is down 8.1% (₹3.4M deficit), heavily concentrated in Consumer Electronics.
+            </p>
+            <p id="personaSynthesis" class="text-xs text-slate-300 leading-relaxed">
+              Root cause analysis indicates a warehouse logistics bottleneck at the Bhiwandi fulfillment hub, leading to dealer cancellations. Evidence strongly corroborates operational disruption rather than brand decay or competitor price pressure.
+            </p>
+          </div>
+
+          <div class="lg:col-span-4 p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5 self-center">
+            <div class="text-[10px] font-mono uppercase text-slate-400">Recommended Focus</div>
+            <div id="personaFocus" class="text-xs font-semibold text-purple-300">
+              Authorize emergency 3PL express carrier rerouting to recover ₹1.4M in stalled revenue.
+            </div>
+            <div id="personaDecisionRights" class="text-[10px] text-slate-400 italic">
+              Requires Executive / VP Supply Chain financial sign-off.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sparse History / Abstention Alert Box (Scenario B) -->
+      <div id="abstentionHeroAlert" class="hidden glass-panel p-5 border-rose-500/50 bg-rose-950/20 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 text-rose-400 font-bold text-sm">
+            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+            <span>MANDATORY GOVERNANCE ABSTENTION: LOW CONFIDENCE (41/100)</span>
+          </div>
+          <span class="badge badge-purple text-xs font-mono">Zero Hallucinated Causal Claims</span>
+        </div>
+        <p class="text-xs text-slate-200 leading-relaxed">
+          The system has deliberately <strong>ABSTAINED</strong> from recommending pricing or promotional interventions because the 12-day historical baseline is too sparse ($n = 12 < 30$ days required) and paid ad attribution signals directly contradict catalog pricing elasticity.
+        </p>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <button class="btn-primary text-xs py-1.5 px-3 bg-purple-700" onclick="window.biApp.openDataRequestModal()">
+            <i data-lucide="database" class="w-3.5 h-3.5"></i>
+            <span>Request 14 More Days of History</span>
+          </button>
+          <button class="btn-outline text-xs py-1.5 px-3" onclick="window.biApp.openExperimentModal()">
+            <i data-lucide="git-branch" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Launch Controlled A/B Channel Split</span>
+          </button>
+          <span class="text-xs text-slate-400 italic ml-2">Status: DEFERRED to Human Gate</span>
+        </div>
+      </div>
+
+      <!-- Investigation Sub-Tabs for Clean Progressive Disclosure -->
+      <div class="flex items-center gap-2 border-b border-slate-800 pb-2">
+        <button id="tabBtn_whatChanged" class="px-4 py-2 rounded-lg text-xs font-bold bg-purple-600/20 text-purple-300 border border-purple-500/40" onclick="window.biApp.switchInvestigateTab('whatChanged')">
+          1. What Changed & Driver Shares
+        </button>
+        <button id="tabBtn_evidenceGraph" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 border border-transparent" onclick="window.biApp.switchInvestigateTab('evidenceGraph')">
+          2. Interactive Evidence Graph & Lineage
+        </button>
+        <button id="tabBtn_confidenceEngine" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 border border-transparent" onclick="window.biApp.switchInvestigateTab('confidenceEngine')">
+          3. Confidence & Trust Engine
+        </button>
+      </div>
+
+      <!-- TAB 1: WHAT CHANGED & DRIVER SHARES -->
+      <div id="tabContent_whatChanged" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left: Anomaly Chart -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="glass-panel p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-slate-100 flex items-center gap-2">
+                  <span>What Changed — Anomaly Baseline vs Actual</span>
+                </h3>
+                <p class="text-xs text-slate-400">De-trended time-series separating structural shifts from seasonal drift.</p>
+              </div>
+              <span class="badge badge-purple text-xs font-mono">Seasonality De-trended</span>
+            </div>
+
+            <div class="h-64 w-full">
+              <canvas id="investigateChartCanvas"></canvas>
+            </div>
+
+            <div id="investigateChecksList" class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+              <!-- Baseline filter checks -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Driver Ranking & Disproven Drivers -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass-panel p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-slate-100 flex items-center gap-2">
+                  <span>Driver Contribution Ranking</span>
+                </h3>
+                <p class="text-[11px] text-slate-400 font-mono text-purple-300">
+                  ⚠️ Variance share — NOT automatic causation.
+                </p>
+              </div>
+              <span class="badge badge-cyan text-xs font-mono">ANOVA</span>
+            </div>
+
+            <div id="driverContributionsList" class="space-y-3">
+              <!-- Horizontal driver contribution bars -->
+            </div>
+          </div>
+
+          <div class="glass-panel p-5 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Suspected Drivers Disproven</h4>
+            <div id="explainDisprovenList" class="space-y-2">
+              <!-- Disproven drivers -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: INTERACTIVE EVIDENCE GRAPH & CHAIN -->
+      <div id="tabContent_evidenceGraph" class="hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Canvas Graph (7 cols) -->
+          <div class="lg:col-span-7 glass-panel p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-slate-100">Interactive Multi-Source Evidence Graph</h3>
+                <p class="text-xs text-slate-400">Click any node to inspect data provenance, raw grain, and calculation formula.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="graph-legend-pill"><span class="legend-dot bg-rose-500"></span> KPI</span>
+                <span class="graph-legend-pill"><span class="legend-dot bg-purple-500"></span> Driver</span>
+                <span class="graph-legend-pill"><span class="legend-dot bg-cyan-500"></span> Stream</span>
+              </div>
+            </div>
+
+            <div class="graph-container">
+              <canvas id="evidenceGraphCanvas"></canvas>
+            </div>
+            <div class="text-[11px] text-slate-400 font-mono">💡 Drag nodes to rearrange • Click to inspect node provenance</div>
+          </div>
+
+          <!-- Corroborated Evidence Chain (5 cols) -->
+          <div class="lg:col-span-5 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Corroborated Evidence Chain</h4>
+            <div id="explainEvidenceChain" class="space-y-3 max-h-[460px] overflow-y-auto pr-1">
+              <!-- Evidence Chain cards -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: CONFIDENCE & TRUST ENGINE -->
+      <div id="tabContent_confidenceEngine" class="hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Score Breakdown (6 cols) -->
+          <div class="lg:col-span-6 glass-panel p-6 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div>
+                <span class="text-xs font-mono uppercase text-slate-400">Deterministic Confidence Score</span>
+                <div id="validateConfidenceScore" class="text-3xl font-extrabold text-purple-400 font-mono">78/100</div>
+              </div>
+              <div class="text-right">
+                <div id="validateSignalsCount" class="text-xs font-semibold text-slate-200">3 independent signals align</div>
+                <div id="validateCausalStatus" class="text-xs text-amber-400 font-mono">Observational Causality</div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="text-xs font-bold text-slate-300 uppercase font-mono">Mathematical Scoring Factors (Non-LLM)</div>
+              <div id="validateMathBreakdown" class="space-y-2 text-xs">
+                <!-- Deterministic factors -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Pillars Trust Matrix (6 cols) -->
+          <div class="lg:col-span-6 glass-panel p-6 space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Trust & Governance Matrix</h4>
+            <div class="space-y-3 text-xs">
+              <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
+                <div class="font-bold text-purple-300">01. Evidence-Based Lineage</div>
+                <div class="text-slate-400 mt-0.5">100% mapped to ERP General Ledger and WMS dispatch logs.</div>
+              </div>
+              <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
+                <div class="font-bold text-cyan-300">02. Uncertainty Disclosure</div>
+                <div class="text-slate-400 mt-0.5">Counter-signals visible; causal link labeled as observational.</div>
+              </div>
+              <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
+                <div class="font-bold text-amber-300">03. Human-Governed Gate</div>
+                <div class="text-slate-400 mt-0.5">Requires Executive / VP sign-off before financial reallocation.</div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-lg bg-purple-950/40 border border-purple-800/60 flex items-center justify-between">
+              <div>
+                <div class="text-[10px] uppercase font-mono text-purple-300">Next Step</div>
+                <div class="text-xs font-bold text-slate-100">Test Counterfactual Levers in Decision Lab</div>
+              </div>
+              <button class="btn-primary text-xs py-1.5 px-3" onclick="window.biApp.setView('sandbox')">
+                Go to Sandbox →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 3: DECISION LAB / SCENARIO TESTING SANDBOX -->
+    <!-- ======================================================================= -->
+    <div id="view_sandbox" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Column: Levers Controls (6 Cols) -->
+        <div class="lg:col-span-6 glass-panel p-6 space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div>
+              <h3 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                <span>Decision Lab — What-If Simulator</span>
+              </h3>
+              <p class="text-xs text-slate-400">Adjust operational levers to model counterfactual outcomes vs baseline.</p>
+            </div>
+            <span class="badge badge-purple text-xs font-mono">Explicit Assumptions</span>
+          </div>
+
+          <div id="sandboxLeversContainer" class="space-y-4">
+            <!-- Dynamically populated sliders & toggles -->
+          </div>
+
+          <!-- Explicit Assumptions Checklist -->
+          <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-2">
+            <div class="text-xs font-bold text-purple-400 uppercase tracking-wider font-mono">Explicit Sandbox Assumptions</div>
+            <ul id="sandboxAssumptionsList" class="space-y-1.5 text-xs text-slate-300">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Column: Projected Impact & Financial Delta (6 Cols) -->
+        <div class="lg:col-span-6 glass-panel p-6 space-y-5 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Simulated Financial Uplift</h4>
+              <span class="text-xs font-mono text-purple-300">Deterministic Model</span>
+            </div>
+
+            <!-- Projected Metrics Grid -->
+            <div class="grid grid-cols-2 gap-3.5">
+              <div class="p-4 rounded-xl bg-slate-900 border border-purple-500/40 space-y-1">
+                <div class="text-[10px] text-slate-400 uppercase font-mono">Projected Output</div>
+                <div id="scenarioProjectedRevenue" class="text-2xl font-extrabold text-purple-300 font-mono">₹40.1M*</div>
+                <div id="scenarioDeltaRevenue" class="text-xs font-bold text-emerald-400 font-mono">Δ +₹1.4M*</div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+                <div class="text-[10px] text-slate-400 uppercase font-mono">Net EBITDA Uplift</div>
+                <div id="scenarioNetEbitda" class="text-2xl font-extrabold text-emerald-400 font-mono">+₹0.95M</div>
+                <div class="text-xs text-slate-400">Total OpEx: <span id="scenarioTotalCost" class="font-mono text-slate-200">₹0.48M</span></div>
+              </div>
+            </div>
+
+            <!-- Comparison Bar Chart -->
+            <div class="h-48 w-full bg-slate-950/40 rounded-xl p-2 border border-slate-800/80">
+              <canvas id="sandboxChartCanvas"></canvas>
+            </div>
+
+            <p class="text-[11px] text-slate-400 font-mono italic">
+              * Note: Scenario modeling is a deterministic mathematical simulation and does not guarantee causal outcomes.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-lg bg-purple-950/30 border border-purple-800/50 flex items-center justify-between text-xs mt-2">
+            <span class="text-slate-300">Ready to route this scenario to the Decision Gate?</span>
+            <button class="btn-primary text-xs py-1.5 px-3.5 font-bold" onclick="window.biApp.setView('gate')">
+              Proceed to Action Gate →
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 4: ACTION CENTER & HUMAN-GOVERNED DECISION GATE -->
+    <!-- ======================================================================= -->
+    <div id="view_gate" class="hidden space-y-6">
+      <div class="glass-panel p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-slate-100 flex items-center gap-2">
+              <span>Human-Governed Decision Gate & Action Playbooks</span>
+            </h3>
+            <p class="text-xs text-slate-400">Evidence confidence and materiality determine automated routing (RECOMMEND / REVIEW / ESCALATE / DEFER).</p>
+          </div>
+          <span class="badge badge-purple font-mono text-xs">Human Ownership Explicit</span>
+        </div>
+
+        <!-- Active Gate Banner -->
+        <div id="actGateContainer">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Authorized Action Playbooks -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Authorized Next-Best Action Playbooks</h4>
+          <div id="actActionsList" class="space-y-3">
+            <!-- Dynamically populated action cards -->
+          </div>
+        </div>
+
+        <!-- Decision Audit Trail -->
+        <div class="pt-4 border-t border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Continuous Decision Audit Ledger</h4>
+            <span class="text-[11px] text-purple-400 font-mono">Immutable Cryptographic Log</span>
+          </div>
+          <div id="auditLogList" class="space-y-2">
+            <!-- Dynamically populated audit events -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 5: GOVERNANCE & OBSERVABILITY SUITE (CLEAN GROUPED SUB-TABS) -->
+    <!-- ======================================================================= -->
+    <div id="view_governance" class="hidden space-y-6">
+      <!-- Governance Sub-Navigation Tabs -->
+      <div class="flex items-center gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
+        <button id="govTab_sources" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-purple-600/20 text-purple-300 border border-purple-500/40" onclick="window.biApp.switchGovTab('sources')">
+          Data Sources (8)
+        </button>
+        <button id="govTab_contracts" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 border border-transparent" onclick="window.biApp.switchGovTab('contracts')">
+          KPI Semantic Contracts
+        </button>
+        <button id="govTab_rbac" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 border border-transparent" onclick="window.biApp.switchGovTab('rbac')">
+          Security / RBAC
+        </button>
+        <button id="govTab_telemetry" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 border border-transparent" onclick="window.biApp.switchGovTab('telemetry')">
+          AI Telemetry
+        </button>
+        <button id="govTab_feedback" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 border border-transparent" onclick="window.biApp.switchGovTab('feedback')">
+          Learning Loop
+        </button>
+      </div>
+
+      <!-- GOVERNANCE SUB-VIEW 1: DATA SOURCES -->
+      <div id="govContent_sources" class="glass-panel p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-slate-100">Heterogeneous Multi-Source Ingestion Hub</h3>
+            <p class="text-xs text-slate-400">8 live streams with distinct grains, refresh cadences, and automated quality checks.</p>
+          </div>
+          <span class="badge badge-emerald text-xs font-mono">All Connectors Healthy</span>
+        </div>
+        <div id="connectorsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Connectors list -->
+        </div>
+      </div>
+
+      <!-- GOVERNANCE SUB-VIEW 2: KPI SEMANTIC CONTRACTS -->
+      <div id="govContent_contracts" class="hidden glass-panel p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-slate-100">KPI Semantic Contracts Registry</h3>
+            <p class="text-xs text-slate-400">Formal contracts specifying business definitions, formulas, grain, SLAs, and ownership.</p>
+          </div>
+          <span class="text-xs font-mono text-cyan-400">5 Contracts Governed</span>
+        </div>
+        <div id="semanticContractsList" class="space-y-4">
+          <!-- Semantic contracts -->
+        </div>
+      </div>
+
+      <!-- GOVERNANCE SUB-VIEW 3: SECURITY / RBAC -->
+      <div id="govContent_rbac" class="hidden glass-panel p-6 space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-slate-100">Role-Based Access Control (RBAC) & Security Sandbox</h3>
+            <p class="text-xs text-slate-400">Domain-level data isolation preventing unauthorized access to operational logs.</p>
+          </div>
+          <span class="badge badge-purple text-xs font-mono">Zero Trust Policy</span>
+        </div>
+        <div id="rbacRolesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Roles grid -->
+        </div>
+
+        <!-- Security Test -->
+        <div class="p-5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-purple-300">Live Security Restriction Demonstration</h4>
+            <span class="badge badge-rose text-xs font-mono">Test Access Violation</span>
+          </div>
+          <p class="text-xs text-slate-300">
+            Click below to simulate a <strong>Marketing User</strong> attempting to access confidential <strong>WMS Driver Fleet & Warehouse SLA Logs</strong>:
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="btn-danger text-xs py-2 px-4 flex items-center gap-2" onclick="window.biApp.triggerSecurityViolationDemo()">
+              <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+              <span>Attempt Unauthorized Data Access (Marketing → WMS Driver Logs)</span>
+            </button>
+            <button class="btn-outline text-xs py-2 px-4" onclick="window.biApp.resetSecurityDemo()">
+              <span>Reset Access State</span>
+            </button>
+          </div>
+
+          <div id="securityViolationOutput" class="hidden p-4 rounded-xl bg-rose-950/40 border border-rose-600/70 space-y-2">
+            <div class="flex items-center justify-between text-rose-400 font-bold text-xs">
+              <span class="flex items-center gap-1.5 font-mono">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-rose-400"></i>
+                <span>ACCESS RESTRICTED — DOMAIN POLICY BREACH</span>
+              </span>
+              <span class="font-mono text-[10px]">HTTP 403 Forbidden</span>
+            </div>
+            <p class="text-xs text-slate-200">
+              User role <strong>'Marketing Leader'</strong> is restricted from accessing domain <code>operations.wms.driver_logs</code> under Security Policy <code>SEC-POL-OPS-04</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOVERNANCE SUB-VIEW 4: AI TELEMETRY -->
+      <div id="govContent_telemetry" class="hidden space-y-6">
+        <div class="glass-panel p-6 space-y-4">
+          <div class="pb-3 border-b border-slate-800">
+            <h3 class="text-base font-bold text-slate-100">AI Architecture & Governance Boundary</h3>
+            <p class="text-xs text-slate-400">Strict separation ensuring LLMs never invent numeric values.</p>
+          </div>
+          <div id="aiArchitectureLayers" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Layers -->
+          </div>
+        </div>
+
+        <div class="glass-panel p-6 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-base font-bold text-slate-100">Live Investigation Runtime Telemetry</h3>
+            <span class="badge badge-emerald text-xs font-mono">Cache Hit (85%)</span>
+          </div>
+          <div id="telemetryStatsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <!-- Stats -->
+          </div>
+        </div>
+      </div>
+
+      <!-- GOVERNANCE SUB-VIEW 5: LEARNING LOOP -->
+      <div id="govContent_feedback" class="hidden glass-panel p-6 space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-slate-100">Analyst Feedback & Continuous Learning Loop</h3>
+            <p class="text-xs text-slate-400">Captures analyst ratings and driver corrections to benchmark analytical weights.</p>
+          </div>
+          <button class="btn-primary text-xs py-1.5 px-3" onclick="window.biApp.openFeedbackModal()">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Submit Feedback</span>
+          </button>
+        </div>
+        <div id="feedbackLogsTable" class="space-y-2.5">
+          <!-- Feedback items -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- SLIDE-OVER EVIDENCE DETAIL INSPECTOR DRAWER -->
+  <!-- ========================================================================= -->
+  <div id="drawerBackdrop" class="drawer-backdrop" onclick="window.biApp.closeDrawer()"></div>
+  <aside id="evidenceDetailDrawer" class="slide-drawer p-6 space-y-5 flex flex-col justify-between">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <span id="drawerBadge" class="badge badge-purple text-xs">Structured</span>
+          <span id="drawerWeight" class="text-xs font-mono text-purple-300">Weight: 94%</span>
+        </div>
+        <button class="text-slate-400 hover:text-white text-lg font-bold" onclick="window.biApp.closeDrawer()">✕</button>
+      </div>
+
+      <div class="space-y-1">
+        <h3 id="drawerTitle" class="text-base font-bold text-slate-100">Evidence Title</h3>
+        <p id="drawerSource" class="text-xs text-purple-400 font-mono">Source System</p>
+      </div>
+
+      <p id="drawerDesc" class="text-xs text-slate-300 leading-relaxed">Detailed description</p>
+
+      <div id="drawerCustomBody" class="space-y-3">
+        <!-- Dynamically injected metrics, quotes, or JSON lineage -->
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+      <span class="text-[11px] text-slate-500 font-mono">Verified by Evidence Engine</span>
+      <button class="btn-outline text-xs" onclick="window.biApp.closeDrawer()">Close</button>
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- SLIDE-OVER KPI SEMANTIC CONTRACT DRAWER -->
+  <!-- ========================================================================= -->
+  <aside id="contractDetailDrawer" class="slide-drawer p-6 space-y-5 flex flex-col justify-between">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <span class="badge badge-cyan text-xs font-mono">KPI Semantic Contract</span>
+        </div>
+        <button class="text-slate-400 hover:text-white text-lg font-bold" onclick="window.biApp.closeContractDrawer()">✕</button>
+      </div>
+
+      <div class="space-y-1">
+        <h3 id="contractDrawerTitle" class="text-lg font-bold text-slate-100">Revenue</h3>
+        <p id="contractDrawerOwner" class="text-xs text-purple-300 font-mono">Owner: Chief Financial Officer</p>
+      </div>
+
+      <div id="contractDrawerBody" class="space-y-3 text-xs">
+        <!-- Dynamically populated contract specs -->
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+      <span class="text-[11px] text-slate-500 font-mono">Governance SLA Protected</span>
+      <button class="btn-outline text-xs" onclick="window.biApp.closeContractDrawer()">Close</button>
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- GENERIC MODAL / ACTION AUTHORIZATION MODAL -->
+  <!-- ========================================================================= -->
+  <div id="genericModalBackdrop" class="modal-backdrop" onclick="window.biApp.closeModal(event)">
+    <div class="modal-card p-6 space-y-4" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 id="modalTitle" class="text-base font-bold text-slate-100">Authorize Action</h3>
+        <button class="text-slate-400 hover:text-white text-lg font-bold" onclick="window.biApp.closeModal()">✕</button>
+      </div>
+      <div id="modalBody" class="space-y-3">
+        <!-- Modal dynamic content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- GUIDED INVESTIGATION MODAL (10 REAL COMPUTE STEPS) -->
+  <!-- ========================================================================= -->
+  <div id="guidedInvestigationModal" class="modal-backdrop">
+    <div class="modal-card p-6 space-y-4 max-w-xl" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+          <h3 class="text-base font-bold text-slate-100">Executing Guided Decision Engine</h3>
+        </div>
+        <span id="guidedStepCounter" class="badge badge-purple text-xs font-mono">Step 1/10</span>
+      </div>
+
+      <div class="space-y-3">
+        <p class="text-xs text-slate-300">
+          Running real-time multi-source analytical pipelines, deterministic variance decomposition, and causal gating checks.
+        </p>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+          <div id="guidedProgressBar" class="h-full bg-gradient-to-r from-purple-500 via-indigo-500 to-emerald-400 transition-all duration-300 w-[10%]"></div>
+        </div>
+
+        <!-- 10 Step Pipeline List -->
+        <div id="guidedStepsContainer" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+          <!-- Dynamically populated step items -->
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+        <span id="guidedStatusText" class="text-purple-300 font-mono">Validating signal anomaly...</span>
+        <button id="guidedDoneBtn" class="btn-primary text-xs py-1.5 px-3 hidden" onclick="window.biApp.closeGuidedModal()">
+          View Decision Brief →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- TOAST NOTIFICATION -->
+  <!-- ========================================================================= -->
+  <div id="toastNotification" class="p-4 rounded-xl bg-slate-900 border border-purple-500 shadow-2xl shadow-purple-500/30 flex items-center gap-3 text-xs text-slate-100 font-medium">
+    <span class="text-base text-purple-400">✨</span>
+    <span id="toastMessage">Action completed successfully!</span>
+  </div>
+
+  <!-- Core Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
