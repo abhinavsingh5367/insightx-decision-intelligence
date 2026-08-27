@@ -74,7 +74,7 @@ The application is entirely self-contained with zero required build steps or com
 cd /Users/abhishekanand/.gemini/antigravity-ide/scratch/insightx-decision-intelligence
 python3 -m http.server 3000
 ```
-Open [workingwebsite]([http://localhost:3000](https://abhishekanandmec.github.io/insightx-decision-intelligence/)) in your browser.
+🚀 **Live Demo:** [Open BUSINESSINTELLIGENCE.AI](https://abhishekanandmec.github.io/insightx-decision-intelligence/)
 
 ### Option 2: Using Node.js npx
 ```bash
