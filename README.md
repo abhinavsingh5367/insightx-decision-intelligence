@@ -400,8 +400,7 @@ npm start
 ### 🌐 Option 3 — Zero Install
 Open `index.html` directly in any modern browser.
 
-Then visit: **[WEBSITE]([http://localhost:8000](https://abhishekanandmec.github.io/insightx-decision-intelligence/?utm_source=chatgpt.com))**
-
+Then visit: **[🌐 WEBSITE](https://abhishekanandmec.github.io/insightx-decision-intelligence/)**
 ---
 
 ## 🧭 Design Principles
