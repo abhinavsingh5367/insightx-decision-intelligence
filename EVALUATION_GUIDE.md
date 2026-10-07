@@ -1,7 +1,7 @@
 # Evaluator & Reviewer Guide — BUSINESSINTELLIGENCE.AI
 
 > **Accenture Innovation Challenge 2026 — Round 2**  
-> **Team InsightX:** Aritra Gupta, Abhishek Anand, Abhishek Biradar  
+> **Author / Lead:** Abhinav Singh ([@abhinavsingh5367](https://github.com/abhinavsingh5367))  
 > **Prototype Repository:** [https://github.com/InsightX-AIC2026/businessintelligence-ai](https://github.com/InsightX-AIC2026/businessintelligence-ai)
 
 ---

@@ -3,7 +3,8 @@
  * Tagline: "From KPI movement to trusted business action."
  * 
  * Accenture Innovation Challenge 2026 Round 2
- * Team: InsightX (Aritra Gupta, Abhishek Anand, Abhishek Biradar)
+ * Author: Abhinav Singh (@abhinavsingh5367)
+ * Team: InsightX
  * 
  * Core Data Models, Semantic Contracts, Heterogeneous Sources & Scenarios
  */
@@ -1380,7 +1381,7 @@ const BI_DATA = {
     },
     {
       id: "fb-102",
-      user: "Abhishek Anand (VP Product)",
+      user: "Abhinav Singh (VP Product)",
       role: "CEO / Executive",
       insightId: "scenario-new-product-conversion",
       hypothesis: "Abstention on 12-day launch conversion dip",
@@ -1392,7 +1393,7 @@ const BI_DATA = {
     },
     {
       id: "fb-103",
-      user: "Abhishek Biradar (Operations Director)",
+      user: "Abhinav Singh (Operations Director)",
       role: "Operations",
       insightId: "scenario-d2c-margin",
       hypothesis: "Ocean container fuel surcharge impact",

@@ -7,7 +7,7 @@
   
   <!-- Meta tags for SEO & Rich Preview -->
   <meta name="description" content="BUSINESSINTELLIGENCE.AI: Evidence-Backed Decision Intelligence Platform for Accenture Innovation Challenge 2026 Round 2. Turning What Changed into Why and What can we confidently do next.">
-  <meta name="author" content="Team InsightX: Aritra Gupta, Abhishek Anand, Abhishek Biradar">
+  <meta name="author" content="Abhinav Singh (@abhinavsingh5367)">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -77,6 +77,13 @@
       </button>
 
       <!-- Export Brief Button -->
+      <!-- Author Profile Badge -->
+      <a href="https://github.com/abhinavsingh5367" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-purple-950/60 border border-purple-500/40 hover:border-purple-300 text-xs text-purple-200 transition-all shadow-sm">
+        <i data-lucide="github" class="w-3.5 h-3.5 text-purple-400"></i>
+        <span class="text-slate-400 font-medium">By</span>
+        <span class="font-bold text-white">Abhinav Singh</span>
+      </a>
+
       <button class="btn-outline text-xs py-1.5 px-3 hidden sm:flex items-center gap-1.5" onclick="window.biApp.printExecutiveBrief()">
         <i data-lucide="file-text" class="w-3.5 h-3.5 text-slate-400"></i>
         <span>Export Brief</span>
@@ -115,11 +122,17 @@
       </button>
     </div>
 
-    <!-- Quick Landing Overview Link -->
-    <button class="text-xs font-semibold text-slate-400 hover:text-purple-300 transition-colors flex items-center gap-1 hidden lg:flex" onclick="window.biApp.setView('landing')">
-      <i data-lucide="compass" class="w-3.5 h-3.5"></i>
-      <span>Product Overview</span>
-    </button>
+    <!-- Quick Landing Overview & Author Link -->
+    <div class="flex items-center gap-3">
+      <a href="https://github.com/abhinavsingh5367/insightx-decision-intelligence" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-slate-300 hover:text-purple-300 transition-colors flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900/60 border border-slate-800">
+        <i data-lucide="github" class="w-3.5 h-3.5 text-purple-400"></i>
+        <span>Abhinav Singh</span>
+      </a>
+      <button class="text-xs font-semibold text-slate-400 hover:text-purple-300 transition-colors flex items-center gap-1 hidden lg:flex" onclick="window.biApp.setView('landing')">
+        <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+        <span>Product Overview</span>
+      </button>
+    </div>
   </nav>
 
   <!-- ========================================================================= -->
@@ -848,6 +861,29 @@
     </div>
 
   </main>
+
+  <!-- ========================================================================= -->
+  <!-- APP FOOTER -->
+  <!-- ========================================================================= -->
+  <footer class="mt-auto border-t border-slate-800/80 bg-[#080d1a]/95 py-6 px-4 sm:px-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-200 font-mono">InsightX</span>
+        <span class="text-slate-600">•</span>
+        <span>Decision Intelligence Platform</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Designed & Developed by</span>
+        <a href="https://github.com/abhinavsingh5367" target="_blank" rel="noopener noreferrer" class="font-semibold text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-1.5">
+          <i data-lucide="github" class="w-3.5 h-3.5"></i>
+          <span>Abhinav Singh</span>
+        </a>
+      </div>
+      <div class="text-[11px] text-slate-500">
+        © 2026 Abhinav Singh (<a href="https://github.com/abhinavsingh5367" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400">@abhinavsingh5367</a>). All rights reserved.
+      </div>
+    </div>
+  </footer>
 
   <!-- ========================================================================= -->
   <!-- SLIDE-OVER EVIDENCE DETAIL INSPECTOR DRAWER -->

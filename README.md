@@ -7,6 +7,7 @@
 **An AI-powered decision intelligence engine that detects material business changes,<br>investigates their drivers, explains the evidence, communicates uncertainty,<br>and recommends governed actions.**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Live Website](https://img.shields.io/badge/Live%20Website-Visit%20Site-success?style=flat&logo=googlechrome)](https://abhinavsingh5367.github.io/insightx-decision-intelligence/)
 [![Platform](https://img.shields.io/badge/Platform-Web-brightgreen)](index.html)
 [![Zero Config](https://img.shields.io/badge/Build-Zero--Config-orange)](package.json)
 [![Accenture Innovation](https://img.shields.io/badge/Accenture%20Innovation-2026-purple)](EVALUATION_GUIDE.md)
@@ -385,14 +386,14 @@ The application is **entirely self-contained** — zero build steps, zero comple
 
 ### 🐍 Option 1 — Python 3 (Recommended)
 ```bash
-git clone https://github.com/abhishekanandmec/insightx-decision-intelligence.git
+git clone https://github.com/abhinavsingh5367/insightx-decision-intelligence.git
 cd insightx-decision-intelligence
 python3 -m http.server 8000
 ```
 
 ### 📦 Option 2 — Node.js
 ```bash
-git clone https://github.com/abhishekanandmec/insightx-decision-intelligence.git
+git clone https://github.com/abhinavsingh5367/insightx-decision-intelligence.git
 cd insightx-decision-intelligence
 npm start
 ```
@@ -400,7 +401,7 @@ npm start
 ### 🌐 Option 3 — Zero Install
 Open `index.html` directly in any modern browser.
 
-Then visit: **[🌐 WEBSITE](https://abhishekanandmec.github.io/insightx-decision-intelligence/)**
+Then visit: **[🌐 WEBSITE](https://abhinavsingh5367.github.io/insightx-decision-intelligence/)**
 ---
 
 ## 🧭 Design Principles
@@ -497,6 +498,6 @@ It's the one that knows why it believes an answer — and when it shouldn't.*
 
 ---
 
-**Built with ❤️ by Team InsightX**
+**Built with ❤️ by Abhinav Singh ([@abhinavsingh5367](https://github.com/abhinavsingh5367))**
 
 </div>

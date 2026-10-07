@@ -1,7 +1,7 @@
 # BUSINESSINTELLIGENCE.AI — Technical Architecture & Mathematical Blueprint
 
 > **Accenture Innovation Challenge 2026 — Round 2 Prototype**  
-> **Team InsightX:** Aritra Gupta, Abhishek Anand, Abhishek Biradar  
+> **Lead / Author:** Abhinav Singh ([@abhinavsingh5367](https://github.com/abhinavsingh5367))  
 > **Tagline:** *“From KPI movement to trusted business action.”*
 
 ---

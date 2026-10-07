@@ -20,16 +20,17 @@
     "counterfactual-simulation",
     "ai-governance"
   ],
-  "author": "Team InsightX (Aritra Gupta, Abhishek Anand, Abhishek Biradar)",
+  "author": "Abhinav Singh (https://github.com/abhinavsingh5367)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/InsightX-AIC2026/businessintelligence-ai.git"
+    "url": "https://github.com/abhinavsingh5367/insightx-decision-intelligence.git"
   },
   "devDependencies": {
     "serve": "^14.2.4"
   },
   "engines": {
     "node": ">=16.0.0"
-  }
+  },
+  "homepage": "https://abhinavsingh5367.github.io/insightx-decision-intelligence/"
 }
